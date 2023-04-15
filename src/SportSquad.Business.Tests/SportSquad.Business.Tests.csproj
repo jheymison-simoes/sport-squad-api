@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>disable</Nullable>
+        <IsPackable>false</IsPackable>
+        <RootNamespace>SportSquad.Business.Tests</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Bogus" Version="34.0.2" />
+      <PackageReference Include="FluentAssertions" Version="6.7.0" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.1" />
+      <PackageReference Include="Moq" Version="4.18.2" />
+      <PackageReference Include="Moq.AutoMock" Version="3.5.0-ci0287" />
+      <PackageReference Include="xunit" Version="2.4.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SportSquad.Api\SportSquad.Api.csproj" />
+      <ProjectReference Include="..\SportSquad.Business\SportSquad.Business.csproj" />
+      <ProjectReference Include="..\SportSquad.Domain\SportSquad.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Utils\ResourceUtils.cs" />
+    </ItemGroup>
+
+</Project>

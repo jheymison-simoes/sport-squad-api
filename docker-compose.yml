@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+
+  SportSquad.Api:
+    image: sportsquadapi
+    container_name: SportSquadApi
+    build:
+      context: .
+      dockerfile: src/SportSquad.Api/Dockerfile
+    dns:
+      - 8.8.8.8
+    ports:
+      - "5022:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    networks:
+      - sport-squad
+    volumes:
+      - ~/.config/:/root/.config
+    depends_on:
+      - postgres
+
+
+  postgres:
+    image: postgres
+    container_name: postgres-sport-squad
+    restart: always
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: SportSquad123456
+      POSTGRES_DB: dbSportSquad
+    ports:
+      - "15436:5432"
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data 
+    networks:
+      - sport-squad
+
+volumes:
+    postgres-volume:
+        driver: local
+
+networks:
+  sport-squad:
+    driver: bridge
