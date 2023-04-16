@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SportSquad.Business.Interfaces.Repositories;
+using SportSquad.Core.Interfaces;
 using SportSquad.Data.Repositories;
-using SportSquad.Domain.Models;
 
 namespace SportSquad.Data.Configuration;
 
@@ -22,6 +22,6 @@ public static class DataInjectionConfiguration
     
     private static void InjectionDependencyUniOfWork(IServiceCollection services)
     {
-
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }

@@ -20,6 +20,7 @@ public class Startup
         services.AddResourceConfiguration();
         services.AddAuthenticatedJwt(Configuration);
         services.AddSwaggerConfiguration();
+        services.AddMediatRConfig();
         services.DependencyInjection(Configuration);
     }
 

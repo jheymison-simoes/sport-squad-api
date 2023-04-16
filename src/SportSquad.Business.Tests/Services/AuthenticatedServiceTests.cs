@@ -31,9 +31,9 @@ public class AuthenticatedServiceTests : IClassFixture<UserFixture>
         _fixture.GenerateService();
 
         var loginRequest = _fixture.GenerateValidLoginRequest();
-        loginRequest.PhoneNumber = null;
+        loginRequest.Email = null;
 
-        var expected = _fixture.GetMessageResource("LOGIN-REQUEST-PHONE_NUMER_EMPTY");
+        var expected = _fixture.GetMessageResource("LOGIN-REQUEST-EMAIL_EMPTY");
         
         //Act
         var result = Assert.ThrowsAsync<CustomException>(
@@ -53,7 +53,7 @@ public class AuthenticatedServiceTests : IClassFixture<UserFixture>
 
         var loginRequest = _fixture.GenerateValidLoginRequest();
 
-        var expected = _fixture.GetMessageResource("USER-INVALID_LOGIN", loginRequest.PhoneNumber);
+        var expected = _fixture.GetMessageResource("USER-INVALID_LOGIN", loginRequest.Email);
 
         _fixture.UserRepository.Setup(s =>
             s.GetByPhoneNumber(It.IsAny<string>(), It.IsAny<string>())
