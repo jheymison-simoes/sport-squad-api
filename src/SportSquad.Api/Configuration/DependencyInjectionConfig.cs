@@ -2,6 +2,7 @@
 using System.Resources;
 using SportSquad.Api.Resource;
 using SportSquad.Business.Configuration;
+using SportSquad.Core.Configuration;
 using SportSquad.Data.Configuration;
 
 namespace SportSquad.Api.Configuration;
@@ -29,6 +30,7 @@ public static class DependencyInjectionConfig
         
         BussinessDependencyInjectionConfig.DependencyInjection(services);
         DataInjectionConfiguration.DependencyInjection(services);
+        CoreDependencyInjectionConfig.DependencyInjection(services);
 
         return services;
     }

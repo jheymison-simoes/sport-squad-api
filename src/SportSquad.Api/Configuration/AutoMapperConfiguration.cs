@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SportSquad.Business.Commands.Authentication;
 using SportSquad.Business.Models.Squad.Request;
 using SportSquad.Business.Models.Squad.Response;
 using SportSquad.Business.Models.User.Request;
@@ -17,6 +18,7 @@ public class AutoMapperConfiguration : Profile
         CreateMap<CreateSquadRequest, Squad>().ReverseMap();
         CreateMap<Squad, SquadResponse>().ReverseMap();
         CreateMap<CreateSquadSquadConfigRequest, SquadConfig>().ReverseMap();
+        CreateMap<LoginRequest, LoginCommand>().ReverseMap();
     }
     
 }

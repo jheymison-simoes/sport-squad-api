@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SportSquad.Business.Exceptions;
-using SportSquad.Business.Interfaces.Services;
-using SportSquad.Business.Models;
+using SportSquad.Business.Commands.Authentication;
 using SportSquad.Business.Models.User.Request;
 using SportSquad.Business.Models.User.Response;
+using SportSquad.Core.Interfaces;
 
 namespace SportSquad.Api.Controllers;
 
@@ -13,49 +12,20 @@ namespace SportSquad.Api.Controllers;
 [Route("api/v{version:apiVersion}/[controller]")]
 public class AuthenticatedController : BaseController<AuthenticatedController>
 {
-    private readonly IAuthenticatedService _authenticatedService;
+    private readonly IMediatorHandler _mediator;
     
     public AuthenticatedController(
         ILogger<AuthenticatedController> logger, 
         IMapper mapper, 
-        IAuthenticatedService authenticatedService) : base(logger, mapper)
+        IMediatorHandler mediator) : base(logger, mapper)
     {
-        _authenticatedService = authenticatedService;
+        _mediator = mediator;
     }
     
-    [HttpPost("Login")]
-    public async Task<ActionResult<BaseResponse<UserSessionResponse>>> Login([FromBody] LoginRequest loginRequest)
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
     {
-        try
-        {
-            var token = await _authenticatedService.UserAuthenticated(loginRequest);
-            return BaseResponseSuccess(token);
-        }
-        catch (CustomException cEx)
-        {
-            return BaseResponseError<UserSessionResponse>(cEx.Message);
-        }
-        catch (Exception ex)
-        {
-            return BaseResponseInternalError<UserSessionResponse>(ex.Message);
-        }
+        var command = Mapper.Map<LoginCommand>(loginRequest);
+        return CustomResponse(await _mediator.SendCommand<LoginCommand, UserSessionResponse>(command));
     }
-    
-    // [HttpPost("LoginWithGoogle")]
-    // public async Task<ActionResult<BaseResponse<UserSessionResponse>>> LoginWithGoogle([FromBody] LoginWithGoogleRequest loginRequest)
-    // {
-    //     try
-    //     {
-    //         var token = await _authenticatedService.UserAuthenticated(loginRequest);
-    //         return BaseResponseSuccess(token);
-    //     }
-    //     catch (CustomException cEx)
-    //     {
-    //         return BaseResponseError<UserSessionResponse>(cEx.Message);
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         return BaseResponseInternalError<UserSessionResponse>(ex.Message);
-    //     }
-    // }
 }

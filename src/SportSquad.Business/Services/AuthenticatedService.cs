@@ -23,7 +23,7 @@ public class AuthenticatedService : BaseService, IAuthenticatedService
     #endregion
     
     #region Validators
-    private readonly LoginRequestValidator _loginRequestValidator;
+    // private readonly LoginRequestValidator _loginRequestValidator;
     #endregion
     
     public AuthenticatedService(
@@ -33,10 +33,11 @@ public class AuthenticatedService : BaseService, IAuthenticatedService
         CultureInfo cultureInfo,
         ICreateUserRepository createUserRepository,
         ITokenService tokenService,
-        IEncryptService encryptService,
-        LoginRequestValidator loginRequestValidator) : base(mapper, appSettings, resourceManager, cultureInfo)
+        IEncryptService encryptService
+        // LoginRequestValidator loginRequestValidator
+        ) : base(mapper, appSettings, resourceManager, cultureInfo)
     {
-        _loginRequestValidator = loginRequestValidator;
+        // _loginRequestValidator = loginRequestValidator;
         _encryptService = encryptService;
         _tokenService = tokenService;
         _createUserRepository = createUserRepository;
@@ -44,8 +45,8 @@ public class AuthenticatedService : BaseService, IAuthenticatedService
 
     public async Task<UserSessionResponse> UserAuthenticated(LoginRequest request)
     {
-        var requestValidator = await _loginRequestValidator.ValidateModel(request);
-        if (requestValidator.error) ReturnError<CustomException>(requestValidator.messageError);
+        // var requestValidator = await _loginRequestValidator.ValidateModel(request);
+        // if (requestValidator.error) ReturnError<CustomException>(requestValidator.messageError);
 
         var user = await _createUserRepository.GetByEmail(request.Email);
         if (user is null) ReturnResourceError<CustomException>("USER-INVALID_LOGIN");

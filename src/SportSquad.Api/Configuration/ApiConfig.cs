@@ -14,21 +14,11 @@ public static class ApiConfig
 
         var appSettingsSection = configuration.GetSection("AppSettings");
         services.Configure<AppSettings>(appSettingsSection);
-        var appSettings = appSettingsSection.Get<AppSettings>();
-        
-        //services.AddAuthenticatedJwt(appSettings);
-        
+
         services.AddHealthChecks().AddDbContextCheck<SqlContext>();
         
         services.AddDbContext<SqlContext>(options =>
         {
-            // options
-            //     .LogTo(Console.WriteLine, LogLevel.Information)
-            //     .EnableSensitiveDataLogging(
-            //         AspnetcoreEnvironment.IsCurrentAspnetcoreEnvironmentValue(AspnetcoreEnvironmentEnum.Docker)
-            //         || AspnetcoreEnvironment.IsCurrentAspnetcoreEnvironmentValue(AspnetcoreEnvironmentEnum
-            //             .Development));
-            
             options
                 .UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                     builder => builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery));

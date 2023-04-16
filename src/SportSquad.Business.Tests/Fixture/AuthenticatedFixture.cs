@@ -38,7 +38,7 @@ public class AuthenticatedFixture
     #endregion
 
     #region Validators
-    public LoginRequestValidator LoginRequestValidator;
+    // public LoginRequestValidator LoginRequestValidator;
     #endregion
 
     private const string CultureFaker = "pt_BR";
@@ -53,18 +53,18 @@ public class AuthenticatedFixture
         UserRepository = new Mock<ICreateUserRepository>();
         TokenService = new Mock<ITokenService>();
         EncryptService = new Mock<IEncryptService>();
-        LoginRequestValidator = new LoginRequestValidator(ResourceManager, culture);
+        // LoginRequestValidator = new LoginRequestValidator(ResourceManager, culture);
 
-        AuthenticatedService = new AuthenticatedService(
-            Mapper,
-            AppSettings.Object,
-            ResourceManager,
-            culture,
-            UserRepository.Object,
-            TokenService.Object,
-            EncryptService.Object,
-            LoginRequestValidator
-        );
+        // AuthenticatedService = new AuthenticatedService(
+        //     Mapper,
+        //     AppSettings.Object,
+        //     ResourceManager,
+        //     culture,
+        //     UserRepository.Object,
+        //     TokenService.Object,
+        //     EncryptService.Object,
+        //     // LoginRequestValidator
+        // );
     }
 
     public LoginRequest GenerateValidLoginRequest()
@@ -72,7 +72,6 @@ public class AuthenticatedFixture
         return new Faker<LoginRequest>(CultureFaker)
             .CustomInstantiator(f => new LoginRequest()
             {
-                PhoneNumber = f.Random.Replace("###########"),
                 Password = f.Random.String2(10)
             });
     }
