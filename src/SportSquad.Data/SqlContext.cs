@@ -1,10 +1,11 @@
 ﻿using SportSquad.Domain.Models;
 using Marques.EFCore.SnakeCase;
 using Microsoft.EntityFrameworkCore;
+using SportSquad.Core.Interfaces;
 
 namespace SportSquad.Data;
 
-public class SqlContext : DbContext
+public class SqlContext : DbContext, IUnitOfWork
 {
     public SqlContext(DbContextOptions<SqlContext> options) : base(options)
     {
@@ -28,5 +29,12 @@ public class SqlContext : DbContext
         modelBuilder.HasSequence<long>("SquadConfigSequence").StartsAt(1).IncrementsBy(1);
         
         base.OnModelCreating(modelBuilder);
+    }
+
+    public async Task<bool> Commit()
+    {
+        var context = this;
+        var rowsEffected = await context.SaveChangesAsync();
+        return rowsEffected > default(int);
     }
 }

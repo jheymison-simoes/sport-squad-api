@@ -3,8 +3,8 @@ using System.Globalization;
 using System.Resources;
 using AutoMapper;
 using SportSquad.Api.Configuration;
-using SportSquad.Business.Services;
 using SportSquad.Business.Tests.Utils;
+using SportSquad.Core.Resource;
 using Xunit;
 
 namespace SportSquad.Business.Tests.Fixture;
@@ -24,7 +24,7 @@ public class ExempleFixture : IDisposable
     public void GenerateExempleService()
     {
         // ExempleRepository = new Mock<IExempleRepository>();
-        ResourceManager = new ResourceManager(typeof(Api.Resource.ApiResource));
+        ResourceManager = new ResourceManager(typeof(ApiResource));
         Mapper = MapperTests.Mapping<AutoMapperConfiguration>();
         var culture = CultureInfo.GetCultureInfo("pt-BR");
         

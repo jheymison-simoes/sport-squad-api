@@ -12,20 +12,18 @@ namespace SportSquad.Api.Controllers;
 [Route("api/v{version:apiVersion}/[controller]")]
 public class AuthenticatedController : BaseController<AuthenticatedController>
 {
-    private readonly IMediatorHandler _mediator;
-    
+
     public AuthenticatedController(
         ILogger<AuthenticatedController> logger, 
         IMapper mapper, 
-        IMediatorHandler mediator) : base(logger, mapper)
+        IMediatorHandler mediator) : base(logger, mapper, mediator)
     {
-        _mediator = mediator;
     }
     
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
     {
         var command = Mapper.Map<LoginCommand>(loginRequest);
-        return CustomResponse(await _mediator.SendCommand<LoginCommand, UserSessionResponse>(command));
+        return CustomResponse(await Mediator.SendCommand<LoginCommand, UserSessionResponse>(command));
     }
 }

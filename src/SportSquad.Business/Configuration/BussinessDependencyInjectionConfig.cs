@@ -5,9 +5,14 @@ using SportSquad.Domain.Models;
 using Microsoft.Extensions.DependencyInjection;
 using SportSquad.Business.Commands.Authentication;
 using SportSquad.Business.Commands.Squad;
+using SportSquad.Business.Commands.Squad.Player;
 using SportSquad.Business.Commands.User;
 using SportSquad.Business.Handlers;
+using SportSquad.Business.Handlers.Authentication;
+using SportSquad.Business.Handlers.Player;
 using SportSquad.Business.Handlers.Squad;
+using SportSquad.Business.Handlers.User;
+using SportSquad.Business.Models.Player.Response;
 using SportSquad.Business.Models.Squad.Request;
 using SportSquad.Business.Models.Squad.Response;
 using SportSquad.Business.Models.User.Request;
@@ -56,6 +61,7 @@ namespace SportSquad.Business.Configuration
             services.AddScoped<IRequestHandler<CreateUserCommand, CommandResponse<UserResponse>>, CreateUserCommandHandler>();
             services.AddScoped<IRequestHandler<CreateUserWithGoogleCommand, CommandResponse<UserResponse>>, CreateUserCommandHandler>();
             services.AddScoped<IRequestHandler<CreateSquadCommand, CommandResponse<SquadResponse>>, CreateSquadCommandHandler>();
+            services.AddScoped<IRequestHandler<CreatePlayerCommand, CommandResponse<PlayerResponse>>, CreatePlayerCommandHandler>();
         }
     }
 }

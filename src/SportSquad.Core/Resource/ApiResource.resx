@@ -222,4 +222,10 @@
   <data name="LOGIN-REQUEST-PHONE_NUMBER_INVALID" xml:space="preserve">
     <value>O número de telefone deve ter {0} caracteres numéricos.</value>
   </data>
+  <data name="SQUAD-PLAYER-NAME_DUPLICATED" xml:space="preserve">
+    <value>Já existe um nome igual a este neste squad. Tente mudar o sobre nome ou usar um apelido conhecido.</value>
+  </data>
+  <data name="SQUAD-NOT_FOUND_BY_ID" xml:space="preserve">
+    <value>Não foi encontrado nenhum squad com este id '{0}'.</value>
+  </data>
 </root>

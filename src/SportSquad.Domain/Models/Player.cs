@@ -51,14 +51,11 @@ public class PlayerValidator : BaseDomainAbstractValidator<Player>
         ResourceManager resourceManager, 
         CultureInfo cultureInfo) : base(resourceManager, cultureInfo)
     {
-        When(r => !string.IsNullOrWhiteSpace(r.Name), () =>
-        {
-            RuleFor(r => r.Name)
-                .NotEmpty()
-                    .WithMessage(GetMessageResource("PLAYER-NAME_EMPTY"))
-                .Must(r => r.Length is > 3 and <= 150)
-                    .WithMessage(GetMessageResource("PLAYER-NAME_INVALID_NUMBER_CHARACTERS", 3, 150));
-        });
+        RuleFor(r => r.Name)
+            .NotEmpty()
+            .WithMessage(GetMessageResource("PLAYER-NAME_EMPTY"))
+            .Must(r => r.Length is > 3 and <= 150)
+            .WithMessage(GetMessageResource("PLAYER-NAME_INVALID_NUMBER_CHARACTERS", 3, 150));
 
         RuleFor(r => r.PlayerTypeId)
             .NotEmpty()

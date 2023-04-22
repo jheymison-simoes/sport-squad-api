@@ -25,18 +25,18 @@ public abstract class BaseHandler : CommandHandler
         ResourceSet = resourceManager.GetResourceSet(cultureInfo, true, true);
     }
     
-    private void AddErrorResource(string nameResource, params object[] parameters)
+    private void AddErrorResource(string message, params object[] parameters)
     {
-        var message = parameters.Length > default(int)
-            ? ResourceSet.GetString(nameResource)!.ResourceFormat(parameters)
-            : ResourceSet.GetString(nameResource);
+        message = parameters.Length > default(int)
+            ? message.ResourceFormat(parameters)
+            : message;
 
         AddError(message);
     }
     
-    protected CommandResponse<TResponse> ReturnReplyWithError<TResponse>(string nameResource, params object[] parameters)
+    protected CommandResponse<TResponse> ReturnReplyWithError<TResponse>(string message, params object[] parameters)
     {
-        AddErrorResource(nameResource, parameters);
+        AddErrorResource(message, parameters);
         return new CommandResponse<TResponse>() { ValidationResult = ValidationResult };
     }
 }

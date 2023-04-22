@@ -1,10 +1,10 @@
 using System.Globalization;
-using System.Linq;
 using System.Resources;
 using AutoMapper;
 using Moq.AutoMock;
 using SportSquad.Api.Configuration;
 using SportSquad.Business.Utils;
+using SportSquad.Core.Resource;
 
 namespace SportSquad.Business.Tests.Utils;
 
@@ -15,20 +15,20 @@ public abstract class BaseFixture
     public CultureInfo CultureInfo;
     public const string Culture = "pt-BR";
     public const string CultureFaker = "pt_BR";
-    
-    public BaseFixture()
+
+    protected BaseFixture()
     {
-        Mapper = Mapper = MapperTests.Mapping<AutoMapperConfiguration>();
-        ResourceManager = new ResourceManager(typeof(Api.Resource.ApiResource));
+        Mapper = MapperTests.Mapping<AutoMapperConfiguration>();
+        ResourceManager = new ResourceManager(typeof(ApiResource));
         CultureInfo = CultureInfo.GetCultureInfo(Culture);
     }
 
-    public abstract void GenerateService();
+    public abstract void GenerateCommandHandler();
 
     public string GetMessageResource(string name, params object[] parameters)
     {
-        return parameters.Any()
-            ? ResourceManager.GetString(name)!.ResourceFormat(parameters)
+        return parameters.Length > 0
+            ? ResourceManager.GetString(name.ToString(), CultureInfo.GetCultureInfo(Culture))!.ResourceFormat(parameters)
             : ResourceManager.GetString(name);
     }
 

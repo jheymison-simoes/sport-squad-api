@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 using System.Resources;
-using SportSquad.Api.Resource;
 using SportSquad.Business.Configuration;
 using SportSquad.Core.Configuration;
+using SportSquad.Core.Resource;
 using SportSquad.Data.Configuration;
 
 namespace SportSquad.Api.Configuration;

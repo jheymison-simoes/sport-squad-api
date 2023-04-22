@@ -8,6 +8,7 @@ using SportSquad.Business.Interfaces.Repositories;
 using SportSquad.Business.Models;
 using SportSquad.Business.Models.Squad.Response;
 using SportSquad.Core.Command;
+using SportSquad.Core.Resource;
 using SportSquad.Domain.Models;
 using SquadDomain = SportSquad.Domain.Models.Squad;
 
@@ -41,16 +42,16 @@ public class CreateSquadCommandHandler : BaseHandler,
     public async Task<CommandResponse<SquadResponse>> Handle(CreateSquadCommand request, CancellationToken cancellationToken)
     {
         var squadDuplicated = await _createSquadRepository.IsDuplicated(request.Name, request.UserId);
-        if (squadDuplicated) return ReturnReplyWithError<SquadResponse>("SQUAD-EXISTING_SQUAD", request.Name);
+        if (squadDuplicated) return ReturnReplyWithError<SquadResponse>(ApiResource.SQUAD_EXISTING_SQUAD, request.Name);
 
         var userExists = await _createSquadRepository.UserExists(request.UserId);
-        if (!userExists) return ReturnReplyWithError<SquadResponse>("USER-NOT_FOUND_BY_ID", request.UserId);
+        if (!userExists) return ReturnReplyWithError<SquadResponse>( ApiResource.USER_NOT_FOUND_BY_ID, request.UserId);
 
         var squadConfigs = request.SquadConfigs;
         foreach (var squadConfig in squadConfigs)
         {
             var playerTypeExist = await _createSquadRepository.PlayerTypeExists(squadConfig.PlayerTypeId);
-            if (!playerTypeExist) return ReturnReplyWithError<SquadResponse>("PLAYER-TYPE-NOT_FOUND_BY_ID", squadConfig.PlayerTypeId);
+            if (!playerTypeExist) return ReturnReplyWithError<SquadResponse>(ApiResource.PLAYER_TYPE_NOT_FOUND_BY_ID, squadConfig.PlayerTypeId);
         }
         
         var squad = Mapper.Map<SquadDomain>(request);
