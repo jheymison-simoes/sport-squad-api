@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using SportSquad.Core.Interfaces;
 using SportSquad.Domain.Models;
 
 namespace SportSquad.Business.Interfaces.Repositories;
@@ -23,4 +24,5 @@ public interface IBaseRepository<TEntity>
     Task<bool> Exists(Expression<Func<TEntity, bool>> predicate);
     void ClearTrackedEntity();
     Task SaveChanges();
+    IUnitOfWork UnitOfWork { get; }
 }

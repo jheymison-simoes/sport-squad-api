@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SportSquad.Business.Models;
 using SportSquad.Core.Command;
+using SportSquad.Core.Interfaces;
 
 namespace SportSquad.Api.Controllers;
 
@@ -10,20 +11,23 @@ public abstract class BaseController<TController> : ControllerBase
 {
     protected ILogger<TController> Logger;
     protected IMapper Mapper;
+    protected IMediatorHandler Mediator;
     private readonly ICollection<string> _errors = new List<string>();
 
     protected BaseController(
         ILogger<TController> logger,
-        IMapper mapper)
+        IMapper mapper,
+        IMediatorHandler mediator)
     {
         Logger = logger;
         Mapper = mapper;
+        Mediator = mediator;
     }
     
-    protected Guid GetUserIdLogged()
+    protected Guid? GetUserIdLogged()
     {
         var id = User.FindFirstValue("Id");
-        var userId = !string.IsNullOrWhiteSpace(id) ? Guid.Parse(id) : Guid.NewGuid();
+        var userId = !string.IsNullOrWhiteSpace(id) ? Guid.Parse(id) : (Guid?)null;
         return userId;
     }
     

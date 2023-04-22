@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using System.Resources;
-using SportSquad.Api.Resource;
+using SportSquad.Core.Resource;
 
 namespace SportSquad.Api.Configuration;
 

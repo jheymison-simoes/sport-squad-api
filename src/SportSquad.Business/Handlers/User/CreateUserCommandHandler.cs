@@ -9,9 +9,10 @@ using SportSquad.Business.Interfaces.Services;
 using SportSquad.Business.Models;
 using SportSquad.Business.Models.User.Response;
 using SportSquad.Core.Command;
+using SportSquad.Core.Resource;
 using SportSquad.Domain.Models;
 
-namespace SportSquad.Business.Handlers;
+namespace SportSquad.Business.Handlers.User;
 
 public class CreateUserCommandHandler : BaseHandler,
     IRequestHandler<CreateUserCommand, CommandResponse<UserResponse>>,
@@ -46,9 +47,9 @@ public class CreateUserCommandHandler : BaseHandler,
     public async Task<CommandResponse<UserResponse>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var userDuplicated = await _createUserRepository.IsDuplicated(request.Email);
-        if (userDuplicated) return ReturnReplyWithError<UserResponse>("USER-EXISTING_USER");
+        if (userDuplicated) return ReturnReplyWithError<UserResponse>(ApiResource.USER_EXISTING_USER);
         
-        var user = Mapper.Map<User>(request);
+        var user = Mapper.Map<Domain.Models.User>(request);
         user.Password = _encryptService.EncryptPassword(user.Password);
 
         await _userValidator.ValidateAsync(user, cancellationToken);
@@ -64,9 +65,9 @@ public class CreateUserCommandHandler : BaseHandler,
     public async Task<CommandResponse<UserResponse>> Handle(CreateUserWithGoogleCommand request, CancellationToken cancellationToken)
     {
         var userDuplicated = await _createUserRepository.IsDuplicated(request.Email);
-        if (userDuplicated) return ReturnReplyWithError<UserResponse>("USER-EXISTING_USER");
+        if (userDuplicated) return ReturnReplyWithError<UserResponse>(ApiResource.USER_EXISTING_USER);
         
-        var user = Mapper.Map<User>(request);
+        var user = Mapper.Map<Domain.Models.User>(request);
         user.Password = string.Empty;
 
         await _userValidator.ValidateAsync(user, cancellationToken);

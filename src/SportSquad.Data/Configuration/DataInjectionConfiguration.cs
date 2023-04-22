@@ -18,6 +18,7 @@ public static class DataInjectionConfiguration
         services.AddScoped<ICreateUserRepository, CreateUserRepository>();
         services.AddScoped<ICreateSquadRepository, CreateSquadRepository>();
         services.AddScoped<IPlayerTypeRepository, PlayerTypeRepository>();
+        services.AddScoped<ICreatePlayerRepository, CreatePlayerRepository>();
     }
     
     private static void InjectionDependencyUniOfWork(IServiceCollection services)

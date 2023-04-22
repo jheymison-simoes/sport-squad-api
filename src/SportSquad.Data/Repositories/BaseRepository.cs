@@ -1,6 +1,7 @@
 ﻿using SportSquad.Business.Interfaces.Repositories;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using SportSquad.Core.Interfaces;
 using SportSquad.Domain.Models;
 
 namespace SportSquad.Data.Repositories;
@@ -11,6 +12,8 @@ public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity>, IDispo
     protected readonly SqlContext Db;
     protected readonly DbSet<TEntity> DbSet;
 
+    public IUnitOfWork UnitOfWork => Db;
+    
     protected BaseRepository(SqlContext db)
     {
         Db = db;

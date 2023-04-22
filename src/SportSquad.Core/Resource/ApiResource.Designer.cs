@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SportSquad.Api.Resource {
+namespace SportSquad.Core.Resource {
     using System;
     
     
@@ -38,7 +38,7 @@ namespace SportSquad.Api.Resource {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SportSquad.Api.Resource.ApiResource", typeof(ApiResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SportSquad.Core.Resource.ApiResource", typeof(ApiResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -254,6 +254,24 @@ namespace SportSquad.Api.Resource {
         public static string SQUAD_NAME_EMPTY {
             get {
                 return ResourceManager.GetString("SQUAD-NAME_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Não foi encontrado nenhum squad com este id &apos;{0}&apos;..
+        /// </summary>
+        public static string SQUAD_NOT_FOUND_BY_ID {
+            get {
+                return ResourceManager.GetString("SQUAD-NOT_FOUND_BY_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Já existe um nome igual a este neste squad. Tente mudar o sobre nome ou usar um apelido conhecido..
+        /// </summary>
+        public static string SQUAD_PLAYER_NAME_DUPLICATED {
+            get {
+                return ResourceManager.GetString("SQUAD-PLAYER-NAME_DUPLICATED", resourceCulture);
             }
         }
         
