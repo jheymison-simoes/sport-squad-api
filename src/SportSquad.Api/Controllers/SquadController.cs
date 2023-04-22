@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SportSquad.Business.Exceptions;
-using SportSquad.Business.Interfaces.Services;
-using SportSquad.Business.Models;
+using SportSquad.Business.Commands.Squad;
 using SportSquad.Business.Models.Squad.Request;
 using SportSquad.Business.Models.Squad.Response;
+using SportSquad.Core.Interfaces;
 
 namespace SportSquad.Api.Controllers;
 
@@ -15,35 +14,21 @@ namespace SportSquad.Api.Controllers;
 [Authorize]
 public class SquadController : BaseController<SquadController>
 {
-    private readonly ISquadService _squadService;
+    private readonly IMediatorHandler _mediator;
     
     public SquadController(
         ILogger<SquadController> logger,
         IMapper mapper, 
-        ISquadService squadService) : base(logger, mapper)
+        IMediatorHandler mediator) : base(logger, mapper)
     {
-        _squadService = squadService;
+        _mediator = mediator;
     }
-    
-    [HttpPost]
-    public async Task<ActionResult<BaseResponse<SquadResponse>>> Create([FromBody] CreateSquadRequest request)
-    {
-        try
-        {
-            var userId = GetUserIdLogged();
-            request.UserId = userId;
 
-            var result = await _squadService.CreateSquad(request);
-            
-            return BaseResponseSuccess(result);
-        }
-        catch (CustomException cEx)
-        {
-            return BaseResponseError<SquadResponse>(cEx.Message);
-        }
-        catch (Exception ex)
-        {
-            return BaseResponseInternalError<SquadResponse>(ex.Message);
-        }
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateSquadRequest request)
+    {
+        var command = Mapper.Map<CreateSquadCommand>(request);
+        command.UserId = GetUserIdLogged();
+        return CustomResponse(await _mediator.SendCommand<CreateSquadCommand, SquadResponse>(command));
     }
 }

@@ -5,7 +5,6 @@ using Moq.AutoMock;
 using SportSquad.Business.Interfaces.Repositories;
 using SportSquad.Business.Interfaces.Services;
 using SportSquad.Business.Models.User.Request;
-using SportSquad.Business.Services;
 using SportSquad.Business.Tests.Utils;
 using SportSquad.Domain.Models;
 using Xunit;
@@ -20,7 +19,6 @@ public class UserCollection : ICollectionFixture<UserFixture>
 public class UserFixture : BaseFixture
 {
     public AutoMocker Mocker;
-    public CreateUserService CreateUserService;
 
     #region Repositories
     public Mock<ICreateUserRepository> CreateUserRepository;
@@ -31,18 +29,15 @@ public class UserFixture : BaseFixture
     #endregion
 
     #region Validators
-    public Mock<CreateUserRequestValidator> CreateUserRequestValidator;
+    // public Mock<CreateUserRequestValidator> CreateUserRequestValidator;
     public Mock<UserValidator> UserValidator;
-    public Mock<RegisterUserWithGoogleRequestValidator> RegisterUserWithGoogleRequestValidator;
     #endregion
     
     public override void GenerateService()
     {
         Mocker = CreateAutoMocker();
-        Mocker.Use(new CreateUserRequestValidator(ResourceManager, CultureInfo));
+        // Mocker.Use(new CreateUserRequestValidator(ResourceManager, CultureInfo));
         Mocker.Use(new UserValidator(ResourceManager, CultureInfo));
-        Mocker.Use(new RegisterUserWithGoogleRequestValidator(ResourceManager, CultureInfo));
-        CreateUserService = Mocker.CreateInstance<CreateUserService>();
         CreateUserRepository = Mocker.GetMock<ICreateUserRepository>();
         EncryptService = Mocker.GetMock<IEncryptService>();
     }

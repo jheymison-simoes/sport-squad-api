@@ -4,8 +4,12 @@ using SportSquad.Business.Services;
 using SportSquad.Domain.Models;
 using Microsoft.Extensions.DependencyInjection;
 using SportSquad.Business.Commands.Authentication;
+using SportSquad.Business.Commands.Squad;
+using SportSquad.Business.Commands.User;
 using SportSquad.Business.Handlers;
+using SportSquad.Business.Handlers.Squad;
 using SportSquad.Business.Models.Squad.Request;
+using SportSquad.Business.Models.Squad.Response;
 using SportSquad.Business.Models.User.Request;
 using SportSquad.Business.Models.User.Response;
 using SportSquad.Core.Command;
@@ -24,8 +28,6 @@ namespace SportSquad.Business.Configuration
         private static void DependencyInjectionValidators(this IServiceCollection services)
         {
             #region Bussiness
-            services.AddScoped<CreateUserRequestValidator>();
-            services.AddScoped<CreateSquadValidator>();
             services.AddScoped<CreateSquadSquadConfigValidator>();
             services.AddScoped<LoginWithGoogleRequestValidator>();
             services.AddScoped<CreateUserWithGoogleRequest>();
@@ -37,7 +39,6 @@ namespace SportSquad.Business.Configuration
             services.AddScoped<SquadValidator>();
             services.AddScoped<SquadConfigValidator>();
             services.AddScoped<PlayerTypeValidator>();
-            services.AddScoped<RegisterUserWithGoogleRequestValidator>();
             services.AddScoped<LoginCommandValidator>();
             #endregion
         }
@@ -47,13 +48,14 @@ namespace SportSquad.Business.Configuration
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAuthenticatedService, AuthenticatedService>();
             services.AddScoped<IEncryptService, EncryptService>();
-            services.AddScoped<ICreateUserService, CreateUserService>();
-            services.AddScoped<ISquadService, SquadService>();
         }
         
         private static void DependencyInjectionCommandHandlers(this IServiceCollection services)
         {
             services.AddScoped<IRequestHandler<LoginCommand, CommandResponse<UserSessionResponse>>, AuthenticationCommandHandler>();
+            services.AddScoped<IRequestHandler<CreateUserCommand, CommandResponse<UserResponse>>, CreateUserCommandHandler>();
+            services.AddScoped<IRequestHandler<CreateUserWithGoogleCommand, CommandResponse<UserResponse>>, CreateUserCommandHandler>();
+            services.AddScoped<IRequestHandler<CreateSquadCommand, CommandResponse<SquadResponse>>, CreateSquadCommandHandler>();
         }
     }
 }
