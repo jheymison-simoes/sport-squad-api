@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SportSquad.Business.Exceptions;
-using SportSquad.Business.Interfaces.Services;
-using SportSquad.Business.Models;
+using SportSquad.Business.Commands.User;
 using SportSquad.Business.Models.User.Request;
 using SportSquad.Business.Models.User.Response;
+using SportSquad.Core.Interfaces;
 
 namespace SportSquad.Api.Controllers;
 
@@ -13,49 +12,26 @@ namespace SportSquad.Api.Controllers;
 [Route("api/v{version:apiVersion}/[controller]")]
 public class UserController : BaseController<UserController>
 {
-    private readonly ICreateUserService _createUserService;
-    
+    private readonly IMediatorHandler _mediator;
     public UserController(
         ILogger<UserController> logger, 
         IMapper mapper,
-        ICreateUserService createUserService) : base(logger, mapper)
+        IMediatorHandler mediator) : base(logger, mapper)
     {
-        _createUserService = createUserService;
+        _mediator = mediator;
     }
     
     [HttpPost]
-    public async Task<ActionResult<BaseResponse<UserResponse>>> Create(CreateUserRequest request)
+    public async Task<IActionResult> Create([FromBody] CreateUserRequest request)
     {
-        try
-        {
-            var result = await _createUserService.CreateUser(request);
-            return BaseResponseSuccess(result);
-        }
-        catch (CustomException cEx)
-        {
-            return BaseResponseError<UserResponse>(cEx.Message);
-        }
-        catch (Exception ex)
-        {
-            return BaseResponseInternalError<UserResponse>(ex.Message);
-        }
+        var command = Mapper.Map<CreateUserCommand>(request);
+        return CustomResponse(await _mediator.SendCommand<CreateUserCommand, UserResponse>(command));
     }
-    
+
     [HttpPost("CreateWithGoogle")]
-    public async Task<ActionResult<BaseResponse<UserResponse>>> CreateWithGoogle(CreateUserWithGoogleRequest request)
+    public async Task<IActionResult> CreateWithGoogle([FromBody] CreateUserWithGoogleRequest request)
     {
-        try
-        {
-            var result = await _createUserService.CreateUser(request);
-            return BaseResponseSuccess(result);
-        }
-        catch (CustomException cEx)
-        {
-            return BaseResponseError<UserResponse>(cEx.Message);
-        }
-        catch (Exception ex)
-        {
-            return BaseResponseInternalError<UserResponse>(ex.Message);
-        }
+        var command = Mapper.Map<CreateUserWithGoogleCommand>(request);
+        return CustomResponse(await _mediator.SendCommand<CreateUserWithGoogleCommand, UserResponse>(command));
     }
 }

@@ -5,14 +5,14 @@ using SportSquad.Business.Validator;
 
 namespace SportSquad.Business.Models.Squad.Request;
 
-public class CreateSquadSquadConfigRequest
+public class CreateSquadConfigRequest
 {
     public int QuantityPlayers { get; set; }
     public Guid PlayerTypeId { get; set; }
     public bool AllowSubstitutes { get; set; }
 }
 
-public class CreateSquadSquadConfigValidator : BaseBusinessAbastractValidator<CreateSquadSquadConfigRequest>
+public class CreateSquadSquadConfigValidator : BaseBusinessAbastractValidator<CreateSquadConfigRequest>
 {
     public CreateSquadSquadConfigValidator(
         ResourceManager resourceManager, 

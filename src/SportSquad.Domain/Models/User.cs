@@ -50,26 +50,33 @@ public class UserValidator : BaseDomainAbstractValidator<User>
             .Must(r => r.Length is > 3 and <= 150)
                 .WithMessage(GetMessageResource("USER-NAME_INVALID_NUMBER_CHARACTERS", 3, 150));
 
-        RuleFor(r => r.Ddd)
-            .NotEmpty()
-                .WithMessage(GetMessageResource("USER-DDD_EMPTY"))
-            .Length(2)
-                .WithMessage(GetMessageResource("USER-DDD_INVALID_NUMBER_CHARACTERS", 2));
+        // TODO - Verificar se vai continuar esta validação quando implementar login com google
+        // RuleFor(r => r.Ddd)
+        //     .NotEmpty()
+        //         .WithMessage(GetMessageResource("USER-DDD_EMPTY"))
+        //     .Length(2)
+        //         .WithMessage(GetMessageResource("USER-DDD_INVALID_NUMBER_CHARACTERS", 2));
+        //
+        // RuleFor(r => r.PhoneNumber)
+        //     .NotEmpty()
+        //         .WithMessage(GetMessageResource("USER-PHONE_NUMBER_EMPTY"))
+        //     .Length(9)
+        //         .WithMessage(GetMessageResource("USER-PHONE_NUMBER_INVALID_NUMBER_CHARACTERS", 9));
+        //
+        // When(r => !string.IsNullOrWhiteSpace(r.Email), () =>
+        // {
+        //     RuleFor(r => r.Email)
+        //         .NotEmpty()
+        //             .WithMessage(GetMessageResource("USER-EMAIL_EMPTY"))
+        //         .EmailAddress()
+        //             .WithMessage(GetMessageResource("USER-EMAIL_INVALID"));
+        // });
         
-        RuleFor(r => r.PhoneNumber)
+        RuleFor(r => r.Email)
             .NotEmpty()
-                .WithMessage(GetMessageResource("USER-PHONE_NUMBER_EMPTY"))
-            .Length(9)
-                .WithMessage(GetMessageResource("USER-PHONE_NUMBER_INVALID_NUMBER_CHARACTERS", 9));
-        
-        When(r => !string.IsNullOrWhiteSpace(r.Email), () =>
-        {
-            RuleFor(r => r.Email)
-                .NotEmpty()
-                    .WithMessage(GetMessageResource("USER-EMAIL_EMPTY"))
-                .EmailAddress()
-                    .WithMessage(GetMessageResource("USER-EMAIL_INVALID"));
-        });
+            .WithMessage(GetMessageResource("USER-EMAIL_EMPTY"))
+            .EmailAddress()
+            .WithMessage(GetMessageResource("USER-EMAIL_INVALID"));
         
         // RuleFor(r => r.Password)
         //     .NotEmpty()

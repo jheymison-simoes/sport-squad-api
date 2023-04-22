@@ -8,7 +8,7 @@ using SportSquad.Core.Command;
 
 namespace SportSquad.Business.Handlers;
 
-public class BaseHandler : CommandHandler
+public abstract class BaseHandler : CommandHandler
 {
     protected readonly ResourceSet ResourceSet;
     protected readonly IMapper Mapper;
