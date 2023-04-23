@@ -12,7 +12,7 @@ public class GetPlayerRepository : BaseRepository<Player>, IGetPlayerRepository
     {
     }
 
-    public async Task<IEnumerable<PlayerResponse>> GetAll(Guid? squadId)
+    public async Task<IEnumerable<PlayerResponse>> GetAllAsync(Guid? squadId)
     {
         return await DbSet.AsNoTracking()
             .Where(p => (!squadId.HasValue || p.SquadId == squadId))

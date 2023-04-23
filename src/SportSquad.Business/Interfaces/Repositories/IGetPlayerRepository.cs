@@ -5,5 +5,5 @@ namespace SportSquad.Business.Interfaces.Repositories;
 
 public interface IGetPlayerRepository : IBaseRepository<Player>
 {
-    Task<IEnumerable<PlayerResponse>> GetAll(Guid? squadId);
+    Task<IEnumerable<PlayerResponse>> GetAllAsync(Guid? squadId);
 }

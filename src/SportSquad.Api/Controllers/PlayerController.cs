@@ -48,4 +48,11 @@ public class PlayerController : BaseController<PlayerController>
         var command = new GetAllPlayerCommand(squadId);
         return CustomResponse(await Mediator.SendCommand<GetAllPlayerCommand, IEnumerable<PlayerResponse>>(command));
     }
+    
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> Get(Guid id)
+    {
+        var command = new GetPlayerByIdCommand(id);
+        return CustomResponse(await Mediator.SendCommand<GetPlayerByIdCommand, PlayerResponse>(command));
+    }
 }
