@@ -34,4 +34,11 @@ public class PlayerController : BaseController<PlayerController>
         command.UserId = GetUserIdLogged();
         return CustomResponse(await Mediator.SendCommand<UpdatePlayerCommand, PlayerResponse>(command));
     }
+    
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var command = new DeletePlayerCommand(id);
+        return CustomResponse(await Mediator.SendCommand<DeletePlayerCommand, PlayerResponse>(command));
+    }
 }
