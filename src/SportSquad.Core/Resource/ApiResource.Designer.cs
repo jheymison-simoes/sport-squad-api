@@ -132,6 +132,15 @@ namespace SportSquad.Core.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O id do jogador não pode ser vazio..
+        /// </summary>
+        public static string PLAYER_ID_EMPTY {
+            get {
+                return ResourceManager.GetString("PLAYER-ID_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O nome não pode ser vazio..
         /// </summary>
         public static string PLAYER_NAME_EMPTY {
@@ -146,6 +155,15 @@ namespace SportSquad.Core.Resource {
         public static string PLAYER_NAME_INVALID_NUMBER_CHARACTERS {
             get {
                 return ResourceManager.GetString("PLAYER-NAME_INVALID_NUMBER_CHARACTERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Não foi encontrado nenhum jogador com este id &apos;{0}&apos;..
+        /// </summary>
+        public static string PLAYER_NOT_FOUND_BY_ID {
+            get {
+                return ResourceManager.GetString("PLAYER-NOT_FOUND_BY_ID", resourceCulture);
             }
         }
         
