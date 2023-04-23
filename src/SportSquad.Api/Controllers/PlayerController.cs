@@ -41,4 +41,11 @@ public class PlayerController : BaseController<PlayerController>
         var command = new DeletePlayerCommand(id);
         return CustomResponse(await Mediator.SendCommand<DeletePlayerCommand, PlayerResponse>(command));
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetAll([FromQuery] Guid? squadId)
+    {
+        var command = new GetAllPlayerCommand(squadId);
+        return CustomResponse(await Mediator.SendCommand<GetAllPlayerCommand, IEnumerable<PlayerResponse>>(command));
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Bogus;
+using SportSquad.Business.Models.Player.Response;
 using SportSquad.Domain.Models;
 using Xunit;
 
@@ -22,5 +23,17 @@ public class PlayerFixture
                 f.Random.Guid(),
                 f.Random.Guid()
             )).Generate(quantity);
+    }
+
+    public List<PlayerResponse> GenerateValidsPlayersResponse(int quantity)
+    {
+        return new Faker<PlayerResponse>(CultureFaker)
+            .CustomInstantiator(f => new PlayerResponse()
+            {
+                Name = f.Name.FullName(),
+                SquadId = f.Random.Guid(),
+                UserId = f.Random.Guid(),
+                PlayerTypeId = f.Random.Guid()
+            }).Generate(quantity);
     }
 }
