@@ -258,6 +258,15 @@ namespace SportSquad.Core.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O id do squad não pode ser vazio..
+        /// </summary>
+        public static string SQUAD_ID_EMPTY {
+            get {
+                return ResourceManager.GetString("SQUAD-ID_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O nome do squad deve ter entre &apos;{0}&apos; e &apos;{1}&apos; caracteres..
         /// </summary>
         public static string SQUAD_INVALID_NUMBER_CHARACTERS {

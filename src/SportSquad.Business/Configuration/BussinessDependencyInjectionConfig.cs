@@ -64,6 +64,7 @@ namespace SportSquad.Business.Configuration
             services.AddScoped<IRequestHandler<CreatePlayerCommand, CommandResponse<PlayerResponse>>, CreatePlayerCommandHandler>();
             services.AddScoped<IRequestHandler<UpdatePlayerCommand, CommandResponse<PlayerResponse>>, UpdatePlayerCommandHandler>();
             services.AddScoped<IRequestHandler<DeletePlayerCommand, CommandResponse<PlayerResponse>>, DeletePlayerCommandHandler>();
+            services.AddScoped<IRequestHandler<GetAllPlayerCommand, CommandResponse<IEnumerable<PlayerResponse>>>, GetPlayerCommandHandler>();
         }
     }
 }
