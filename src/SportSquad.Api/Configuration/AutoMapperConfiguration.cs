@@ -36,5 +36,6 @@ public class AutoMapperConfiguration : Profile
         CreateMap<CreatePlayerCommand, Player>().ReverseMap();
         CreateMap<Player, PlayerResponse>().ReverseMap();
         CreateMap<PlayerType, PlayerTypeResponse>().ReverseMap();
+        CreateMap<UpdatePlayerRequest, UpdatePlayerCommand>().ReverseMap();
     }
 }

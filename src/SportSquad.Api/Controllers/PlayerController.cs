@@ -26,4 +26,12 @@ public class PlayerController : BaseController<PlayerController>
         command.UserId = GetUserIdLogged();
         return CustomResponse(await Mediator.SendCommand<CreatePlayerCommand, PlayerResponse>(command));
     }
+    
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] UpdatePlayerRequest request)
+    {
+        var command = Mapper.Map<UpdatePlayerCommand>(request);
+        command.UserId = GetUserIdLogged();
+        return CustomResponse(await Mediator.SendCommand<UpdatePlayerCommand, PlayerResponse>(command));
+    }
 }

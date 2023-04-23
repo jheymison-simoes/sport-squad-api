@@ -62,6 +62,7 @@ namespace SportSquad.Business.Configuration
             services.AddScoped<IRequestHandler<CreateUserWithGoogleCommand, CommandResponse<UserResponse>>, CreateUserCommandHandler>();
             services.AddScoped<IRequestHandler<CreateSquadCommand, CommandResponse<SquadResponse>>, CreateSquadCommandHandler>();
             services.AddScoped<IRequestHandler<CreatePlayerCommand, CommandResponse<PlayerResponse>>, CreatePlayerCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdatePlayerCommand, CommandResponse<PlayerResponse>>, UpdatePlayerCommandHandler>();
         }
     }
 }
