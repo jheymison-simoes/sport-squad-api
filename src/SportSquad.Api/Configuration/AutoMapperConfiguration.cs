@@ -37,5 +37,7 @@ public class AutoMapperConfiguration : Profile
         CreateMap<Player, PlayerResponse>().ReverseMap();
         CreateMap<PlayerType, PlayerTypeResponse>().ReverseMap();
         CreateMap<UpdatePlayerRequest, UpdatePlayerCommand>().ReverseMap();
+        CreateMap<UpdateSquadConfigRequest, UpdateSquadConfigCommand>().ReverseMap();
+        CreateMap<SquadConfig, SquadConfigResponse>().ReverseMap();
     }
 }

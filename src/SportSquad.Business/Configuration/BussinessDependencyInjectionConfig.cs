@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SportSquad.Business.Commands.Authentication;
 using SportSquad.Business.Commands.Squad;
 using SportSquad.Business.Commands.Squad.Player;
+using SportSquad.Business.Commands.Squad.SquadConfig;
 using SportSquad.Business.Commands.User;
 using SportSquad.Business.Handlers;
 using SportSquad.Business.Handlers.Authentication;
@@ -66,6 +67,7 @@ namespace SportSquad.Business.Configuration
             services.AddScoped<IRequestHandler<DeletePlayerCommand, CommandResponse<PlayerResponse>>, DeletePlayerCommandHandler>();
             services.AddScoped<IRequestHandler<GetAllPlayerCommand, CommandResponse<IEnumerable<PlayerResponse>>>, GetPlayerCommandHandler>();
             services.AddScoped<IRequestHandler<GetPlayerByIdCommand, CommandResponse<PlayerResponse>>, GetPlayerCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateSquadConfigCommand, CommandResponse<SquadConfigResponse>>, UpdateSquadCommandHandler>();
         }
     }
 }

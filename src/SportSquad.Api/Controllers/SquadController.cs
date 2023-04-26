@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SportSquad.Business.Commands.Squad;
+using SportSquad.Business.Commands.Squad.SquadConfig;
 using SportSquad.Business.Models.Squad.Request;
 using SportSquad.Business.Models.Squad.Response;
 using SportSquad.Core.Interfaces;
@@ -27,5 +28,12 @@ public class SquadController : BaseController<SquadController>
         var command = Mapper.Map<CreateSquadCommand>(request);
         command.UserId = GetUserIdLogged() ?? Guid.NewGuid();
         return CustomResponse(await Mediator.SendCommand<CreateSquadCommand, SquadResponse>(command));
+    }
+    
+    [HttpPut("SquadConfig")]
+    public async Task<IActionResult> UpdateSquadConfig([FromBody] UpdateSquadConfigRequest request)
+    {
+        var command = Mapper.Map<UpdateSquadConfigCommand>(request);
+        return CustomResponse(await Mediator.SendCommand<UpdateSquadConfigCommand, SquadConfigResponse>(command));
     }
 }

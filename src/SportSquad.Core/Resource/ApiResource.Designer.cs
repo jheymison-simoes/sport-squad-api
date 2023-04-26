@@ -222,6 +222,24 @@ namespace SportSquad.Core.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O id da configuração do squad não pode ser vazio..
+        /// </summary>
+        public static string SQUAD_CONFIG_ID_EMPTY {
+            get {
+                return ResourceManager.GetString("SQUAD-CONFIG-ID_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Não foi encontrada nenhuma configuração de squad com este id &apos;{0}&apos;.
+        /// </summary>
+        public static string SQUAD_CONFIG_NOT_FOUND_BY_ID {
+            get {
+                return ResourceManager.GetString("SQUAD-CONFIG-NOT_FOUND_BY_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O tipo de jogador da configuração de squad não pode ser vazio..
         /// </summary>
         public static string SQUAD_CONFIG_PLAYER_TYPE_ID_EMPTY {
