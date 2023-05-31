@@ -38,10 +38,10 @@ public class AuthenticationCommandHandler : BaseHandler,
     public async Task<CommandResponse<UserSessionResponse>> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
         var user = await _createUserRepository.GetByEmail(request.Email);
-        if (user is null) return ReturnReplyWithError<UserSessionResponse>(ApiResource.USER_INVALID_LOGIN);
+        if (user is null) return ReturnError<UserSessionResponse>(ApiResource.USER_INVALID_LOGIN);
         
         var passwordEncrypt = _encryptService.EncryptPassword(request.Password);
-        if (passwordEncrypt != user!.Password) return ReturnReplyWithError<UserSessionResponse>(ApiResource.USER_INVALID_LOGIN);
+        if (passwordEncrypt != user!.Password) return ReturnError<UserSessionResponse>(ApiResource.USER_INVALID_LOGIN);
 
         var tokenGenerated = _tokenService.GenerateToken(user);
         

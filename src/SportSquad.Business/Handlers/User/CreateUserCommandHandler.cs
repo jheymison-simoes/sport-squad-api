@@ -47,7 +47,7 @@ public class CreateUserCommandHandler : BaseHandler,
     public async Task<CommandResponse<UserResponse>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var userDuplicated = await _createUserRepository.IsDuplicated(request.Email);
-        if (userDuplicated) return ReturnReplyWithError<UserResponse>(ApiResource.USER_EXISTING_USER);
+        if (userDuplicated) return ReturnError<UserResponse>(ApiResource.USER_EXISTING_USER);
         
         var user = Mapper.Map<Domain.Models.User>(request);
         user.Password = _encryptService.EncryptPassword(user.Password);
@@ -65,7 +65,7 @@ public class CreateUserCommandHandler : BaseHandler,
     public async Task<CommandResponse<UserResponse>> Handle(CreateUserWithGoogleCommand request, CancellationToken cancellationToken)
     {
         var userDuplicated = await _createUserRepository.IsDuplicated(request.Email);
-        if (userDuplicated) return ReturnReplyWithError<UserResponse>(ApiResource.USER_EXISTING_USER);
+        if (userDuplicated) return ReturnError<UserResponse>(ApiResource.USER_EXISTING_USER);
         
         var user = Mapper.Map<Domain.Models.User>(request);
         user.Password = string.Empty;

@@ -32,16 +32,16 @@ public class UpdatePlayerCommandHandler : BaseHandler,
     public async Task<CommandResponse<PlayerResponse>> Handle(UpdatePlayerCommand request, CancellationToken cancellationToken)
     {
         var player = await _updatePlayerRepository.GetById(request.Id);
-        if (player is null) return ReturnReplyWithError<PlayerResponse>(ApiResource.PLAYER_NOT_FOUND_BY_ID, request.Id);
+        if (player is null) return ReturnError<PlayerResponse>(ApiResource.PLAYER_NOT_FOUND_BY_ID, request.Id);
 
         var asSame = request.AsSame(player.Name, player.PlayerTypeId);
         if (asSame) return ReturnReply(Mapper.Map<PlayerResponse>(player));
         
         var nameIsDuplicated = await _updatePlayerRepository.IsDuplicated(request.Name, player.SquadId);
-        if (nameIsDuplicated) return ReturnReplyWithError<PlayerResponse>(ApiResource.SQUAD_PLAYER_NAME_DUPLICATED);
+        if (nameIsDuplicated) return ReturnError<PlayerResponse>(ApiResource.SQUAD_PLAYER_NAME_DUPLICATED);
 
         var existsPlayerType = await _updatePlayerRepository.ExistsPlayerType(request.PlayerTypeId);
-        if (!existsPlayerType) return ReturnReplyWithError<PlayerResponse>(ApiResource.PLAYER_TYPE_NOT_FOUND_BY_ID, request.PlayerTypeId);
+        if (!existsPlayerType) return ReturnError<PlayerResponse>(ApiResource.PLAYER_TYPE_NOT_FOUND_BY_ID, request.PlayerTypeId);
 
         player.PlayerTypeId = request.PlayerTypeId;
         player.Name = request.Name;

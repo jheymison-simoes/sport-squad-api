@@ -27,7 +27,7 @@ public class UpdateSquadCommandHandlerTests : IClassFixture<SquadConfigFixture>
     [Fact(DisplayName = "Do not update a squad configuration if not found by id")]
     [Trait("Handler", "Update Squad Command Handler")]
     [Trait("Method", "Update Squad Command")]
-    public async void UpdateSquad_DoNotUpdate_SquadConfigNotFoundById()
+    public async void UpdateSquadConfig_DoNotUpdate_SquadConfigNotFoundById()
     {
         // Arrange
         _fixture.GenerateCommandHandler();
@@ -49,7 +49,7 @@ public class UpdateSquadCommandHandlerTests : IClassFixture<SquadConfigFixture>
     [Fact(DisplayName = "Update squad configuration successfully")]
     [Trait("Handler", "Update Squad Command Handler")]
     [Trait("Method", "Update Squad Command")]
-    public async void UpdateSquad_Update_WithSuccess()
+    public async void UpdateSquadConfig_Update_WithSuccess()
     {
         // Arrange
         _fixture.GenerateCommandHandler();

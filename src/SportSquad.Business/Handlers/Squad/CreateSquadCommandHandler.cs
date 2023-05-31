@@ -42,16 +42,16 @@ public class CreateSquadCommandHandler : BaseHandler,
     public async Task<CommandResponse<SquadResponse>> Handle(CreateSquadCommand request, CancellationToken cancellationToken)
     {
         var squadDuplicated = await _createSquadRepository.IsDuplicated(request.Name, request.UserId);
-        if (squadDuplicated) return ReturnReplyWithError<SquadResponse>(ApiResource.SQUAD_EXISTING_SQUAD, request.Name);
+        if (squadDuplicated) return ReturnError<SquadResponse>(ApiResource.SQUAD_EXISTING_SQUAD, request.Name);
 
         var userExists = await _createSquadRepository.UserExists(request.UserId);
-        if (!userExists) return ReturnReplyWithError<SquadResponse>( ApiResource.USER_NOT_FOUND_BY_ID, request.UserId);
+        if (!userExists) return ReturnError<SquadResponse>( ApiResource.USER_NOT_FOUND_BY_ID, request.UserId);
 
         var squadConfigs = request.SquadConfigs;
         foreach (var squadConfig in squadConfigs)
         {
             var playerTypeExist = await _createSquadRepository.PlayerTypeExists(squadConfig.PlayerTypeId);
-            if (!playerTypeExist) return ReturnReplyWithError<SquadResponse>(ApiResource.PLAYER_TYPE_NOT_FOUND_BY_ID, squadConfig.PlayerTypeId);
+            if (!playerTypeExist) return ReturnError<SquadResponse>(ApiResource.PLAYER_TYPE_NOT_FOUND_BY_ID, squadConfig.PlayerTypeId);
         }
         
         var squad = Mapper.Map<SquadDomain>(request);

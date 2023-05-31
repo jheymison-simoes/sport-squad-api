@@ -20,7 +20,7 @@ public static class AuthenticatedConfiguration
         {
             x.DefaultAuthenticateScheme = "SportSquad";
             x.DefaultChallengeScheme = "SportSquad";
-        }).AddJwtBearer("SportSquad",x =>
+        }).AddJwtBearer("SportSquad", x =>
         {
             x.RequireHttpsMetadata = false;
             x.SaveToken = true;
@@ -31,38 +31,23 @@ public static class AuthenticatedConfiguration
                 ValidateIssuer = false,
                 ValidateAudience = false
             };
-        })
-        .AddGoogle(GoogleDefaults.AuthenticationScheme, x =>
-        {
-            x.ClientId = appSettings.GoogleClientId;
-            x.ClientSecret = appSettings.GoogleClientSecret;
         });
+        // .AddGoogle(GoogleDefaults.AuthenticationScheme, x =>
+        // {
+        //     x.ClientId = appSettings.GoogleClientId;
+        //     x.ClientSecret = appSettings.GoogleClientSecret;
+        // });
         
         services.AddAuthorization(options =>
         {
+            // options.DefaultPolicy = new AuthorizationPolicyBuilder()
+            //     .RequireAuthenticatedUser()
+            //     .AddAuthenticationSchemes("SportSquad", "Google")
+            //     .Build();
             options.DefaultPolicy = new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
-                .AddAuthenticationSchemes("SportSquad", "Google")
+                .AddAuthenticationSchemes("SportSquad")
                 .Build();
         });
-        
-        
-        // var key = Encoding.ASCII.GetBytes(appSettings.SecretToken);
-        // services.AddAuthentication(options =>
-        // {
-        //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        //     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        // }).AddJwtBearer(options =>
-        // {
-        //     options.RequireHttpsMetadata = false;
-        //     options.SaveToken = true;
-        //     options.TokenValidationParameters = new TokenValidationParameters
-        //     {
-        //         ValidateIssuerSigningKey = true,
-        //         IssuerSigningKey = new SymmetricSecurityKey(key),
-        //         ValidateIssuer = false,
-        //         ValidateAudience = false
-        //     };
-        // });
     }
 }
