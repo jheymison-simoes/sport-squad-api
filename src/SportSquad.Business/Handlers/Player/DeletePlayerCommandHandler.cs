@@ -32,7 +32,7 @@ public class DeletePlayerCommandHandler : BaseHandler,
     public async Task<CommandResponse<PlayerResponse>> Handle(DeletePlayerCommand request, CancellationToken cancellationToken)
     {
         var player = await _deletePlayerRepository.GetById(request.Id);
-        if (player is null) return ReturnReplyWithError<PlayerResponse>(ApiResource.PLAYER_NOT_FOUND_BY_ID, request.Id);
+        if (player is null) return ReturnError<PlayerResponse>(ApiResource.PLAYER_NOT_FOUND_BY_ID, request.Id);
         
         _deletePlayerRepository.Remove(player);
         await SaveData(_deletePlayerRepository.UnitOfWork);

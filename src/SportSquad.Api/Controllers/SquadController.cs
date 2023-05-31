@@ -36,4 +36,11 @@ public class SquadController : BaseController<SquadController>
         var command = Mapper.Map<UpdateSquadConfigCommand>(request);
         return CustomResponse(await Mediator.SendCommand<UpdateSquadConfigCommand, SquadConfigResponse>(command));
     }
+    
+    [HttpDelete("SquadConfig/{id:guid}")]
+    public async Task<IActionResult> DeleteSquadConfig(Guid id)
+    {
+        var command = new DeleteSquadConfigCommand(id);
+        return CustomResponse(await Mediator.SendCommand<DeleteSquadConfigCommand, SquadConfigResponse>(command));
+    }
 }

@@ -27,14 +27,11 @@ public abstract class BaseHandler : CommandHandler
     
     private void AddErrorResource(string message, params object[] parameters)
     {
-        message = parameters.Length > default(int)
-            ? message.ResourceFormat(parameters)
-            : message;
-
+        message = parameters.Length > default(int) ? message.ResourceFormat(parameters) : message;
         AddError(message);
     }
     
-    protected CommandResponse<TResponse> ReturnReplyWithError<TResponse>(string message, params object[] parameters)
+    protected CommandResponse<TResponse> ReturnError<TResponse>(string message, params object[] parameters)
     {
         AddErrorResource(message, parameters);
         return new CommandResponse<TResponse>() { ValidationResult = ValidationResult };

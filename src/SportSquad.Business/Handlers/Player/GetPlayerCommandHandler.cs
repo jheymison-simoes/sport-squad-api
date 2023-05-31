@@ -41,7 +41,7 @@ public class GetPlayerCommandHandler : BaseHandler,
     public async Task<CommandResponse<PlayerResponse>> Handle(GetPlayerByIdCommand request, CancellationToken cancellationToken)
     {
         var player = await _getPlayerRepository.GetById(request.Id);
-        if (player is null) return ReturnReplyWithError<PlayerResponse>(ApiResource.PLAYER_NOT_FOUND_BY_ID, request.Id);
+        if (player is null) return ReturnError<PlayerResponse>(ApiResource.PLAYER_NOT_FOUND_BY_ID, request.Id);
 
         var response = Mapper.Map<PlayerResponse>(player);
         return ReturnReply(response);

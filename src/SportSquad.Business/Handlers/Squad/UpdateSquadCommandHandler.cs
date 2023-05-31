@@ -32,7 +32,7 @@ public class UpdateSquadCommandHandler : BaseHandler,
     public async Task<CommandResponse<SquadConfigResponse>> Handle(UpdateSquadConfigCommand request, CancellationToken cancellationToken)
     {
         var squadConfig = await _updateSquadRepository.GetSquadConfigByIdAsync(request.Id);
-        if (squadConfig is null) return ReturnReplyWithError<SquadConfigResponse>(ApiResource.SQUAD_CONFIG_NOT_FOUND_BY_ID, request.Id);
+        if (squadConfig is null) return ReturnError<SquadConfigResponse>(ApiResource.SQUAD_CONFIG_NOT_FOUND_BY_ID, request.Id);
 
         squadConfig.AllowSubstitutes = request.AllowSubstitutes;
         squadConfig.QuantityPlayers = request.QuantityPlayers;

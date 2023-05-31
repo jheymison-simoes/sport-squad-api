@@ -40,13 +40,13 @@ public class CreatePlayerCommandHandler : BaseHandler,
     public async Task<CommandResponse<PlayerResponse>> Handle(CreatePlayerCommand request, CancellationToken cancellationToken)
     {
         var isDuplicated = await _createPlayerRepository.IsDuplicatedAync(request.Name, request.SquadId);
-        if (isDuplicated) return ReturnReplyWithError<PlayerResponse>(ApiResource.SQUAD_PLAYER_NAME_DUPLICATED);
+        if (isDuplicated) return ReturnError<PlayerResponse>(ApiResource.SQUAD_PLAYER_NAME_DUPLICATED);
 
         var squadExists = await _createPlayerRepository.ExistsSquadAsync(request.SquadId);
-        if (!squadExists) return ReturnReplyWithError<PlayerResponse>(ApiResource.SQUAD_NOT_FOUND_BY_ID, request.SquadId);
+        if (!squadExists) return ReturnError<PlayerResponse>(ApiResource.SQUAD_NOT_FOUND_BY_ID, request.SquadId);
         
         var playerTypeExists = await _createPlayerRepository.ExistsPlayerTypeAsync(request.PlayerTypeId);
-        if (!playerTypeExists) return ReturnReplyWithError<PlayerResponse>(ApiResource.PLAYER_TYPE_NOT_FOUND_BY_ID, request.PlayerTypeId);
+        if (!playerTypeExists) return ReturnError<PlayerResponse>(ApiResource.PLAYER_TYPE_NOT_FOUND_BY_ID, request.PlayerTypeId);
 
         var player = Mapper.Map<PlayerDomain>(request);
 
