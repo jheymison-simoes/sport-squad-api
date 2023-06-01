@@ -27,7 +27,7 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env,  IApiVersionDescriptionProvider provider, SqlContext context)
     {
         context.Database.Migrate();
-        app.UseApiConfiguration(env);
+        app.UseApiConfiguration(env, Configuration);
         app.UseSwaggerConfiguration(provider);
     }
 }
