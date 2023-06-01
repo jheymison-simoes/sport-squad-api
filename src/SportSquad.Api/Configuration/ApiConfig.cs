@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+﻿using KissLog.AspNetCore;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SportSquad.Business.Models;
@@ -10,10 +11,12 @@ public static class ApiConfig
 {
     public static void AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddControllers();
-
         var appSettingsSection = configuration.GetSection("AppSettings");
         services.Configure<AppSettings>(appSettingsSection);
+
+        services.AddKissLogConfiguration();
+        
+        services.AddControllers();
 
         services.AddHealthChecks().AddDbContextCheck<SqlContext>();
         
@@ -54,7 +57,7 @@ public static class ApiConfig
         });
     }
     
-    public static IApplicationBuilder UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
+    public static IApplicationBuilder UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env, IConfiguration configuration)
     {
         if (env.IsDevelopment())
         {
@@ -67,6 +70,8 @@ public static class ApiConfig
         app.UseAuthorization();
 
         app.UseCors("Total");
+        
+        app.UseKissLogConfiguration(configuration);
 
         app.UseEndpoints(endpoints =>
         {
