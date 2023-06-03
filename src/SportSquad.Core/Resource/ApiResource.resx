@@ -243,4 +243,7 @@
   <data name="SQUAD-CONFIG-NOT_FOUND_BY_ID" xml:space="preserve">
     <value>Não foi encontrada nenhuma configuração de squad com este id '{0}'</value>
   </data>
+  <data name="GET-SQUAD-BY-USER-USER_ID_EMPTY" xml:space="preserve">
+    <value>Houve um erro ao buscar seus squads, tente novamente mais tarde.</value>
+  </data>
 </root>
