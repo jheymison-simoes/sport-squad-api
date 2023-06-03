@@ -24,6 +24,7 @@ public static class DataInjectionConfiguration
         services.AddScoped<IGetPlayerRepository, GetPlayerRepository>();
         services.AddScoped<IUpdateSquadRepository, UpdateSquadRepository>();
         services.AddScoped<IDeleteSquadRepository, DeleteSquadRepository>();
+        services.AddScoped<IGetSquadRepository, GetSquadRepository>();
     }
     
     private static void InjectionDependencyUniOfWork(IServiceCollection services)

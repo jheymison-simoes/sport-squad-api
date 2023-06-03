@@ -69,6 +69,15 @@ namespace SportSquad.Core.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Houve um erro ao buscar seus squads, tente novamente mais tarde..
+        /// </summary>
+        public static string GET_SQUAD_BY_USER_USER_ID_EMPTY {
+            get {
+                return ResourceManager.GetString("GET-SQUAD-BY-USER-USER_ID_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O email não pode ser vazio..
         /// </summary>
         public static string LOGIN_REQUEST_EMAIL_EMPTY {

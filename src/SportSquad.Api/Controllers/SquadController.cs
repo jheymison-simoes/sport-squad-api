@@ -30,6 +30,14 @@ public class SquadController : BaseController<SquadController>
         return CustomResponse(await Mediator.SendCommand<CreateSquadCommand, SquadResponse>(command));
     }
     
+    [AllowAnonymous]
+    [HttpGet("{userId:guid}")]
+    public async Task<IActionResult> GetAllByUserId(Guid userId)
+    {
+        var command = new GetAllSquadByUserCommand(userId);
+        return CustomResponse(await Mediator.SendCommand<GetAllSquadByUserCommand, IEnumerable<SquadResponse>>(command));
+    }
+    
     [HttpPut("SquadConfig")]
     public async Task<IActionResult> UpdateSquadConfig([FromBody] UpdateSquadConfigRequest request)
     {
