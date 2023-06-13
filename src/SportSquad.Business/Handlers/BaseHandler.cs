@@ -25,7 +25,7 @@ public abstract class BaseHandler : CommandHandler
         ResourceSet = resourceManager.GetResourceSet(cultureInfo, true, true);
     }
     
-    private void AddErrorResource(string message, params object[] parameters)
+    protected void AddErrorResource(string message, params object[] parameters)
     {
         message = parameters.Length > default(int) ? message.ResourceFormat(parameters) : message;
         AddError(message);

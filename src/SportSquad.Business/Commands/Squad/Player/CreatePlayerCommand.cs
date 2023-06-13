@@ -13,6 +13,7 @@ public class CreatePlayerCommand : Command<PlayerResponse>
     public Guid PlayerTypeId { get; set; }
     public Guid SquadId { get; set; }
     public Guid? UserId { get; set; }
+    public int SkillLevel { get; set; }
 }
 
 public class CreatePlayerValidator : BaseBusinessAbastractValidator<CreatePlayerCommand>
