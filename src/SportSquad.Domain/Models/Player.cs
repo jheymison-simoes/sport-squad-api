@@ -11,6 +11,7 @@ public class Player : Entity
     public Guid PlayerTypeId { get; set; }
     public Guid SquadId { get; set; }
     public Guid? UserId { get; set; }
+    public int SkillLevel { get; set; }
 
     #region Relacionship
     public PlayerType PlayerType { get; set; }

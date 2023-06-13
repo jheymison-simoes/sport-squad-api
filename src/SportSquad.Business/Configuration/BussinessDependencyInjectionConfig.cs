@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SportSquad.Business.Commands.Authentication;
 using SportSquad.Business.Commands.Squad;
 using SportSquad.Business.Commands.Squad.Player;
+using SportSquad.Business.Commands.Squad.Player.PlayerType;
 using SportSquad.Business.Commands.Squad.SquadConfig;
 using SportSquad.Business.Commands.User;
 using SportSquad.Business.Handlers;
@@ -14,6 +15,7 @@ using SportSquad.Business.Handlers.Player;
 using SportSquad.Business.Handlers.Squad;
 using SportSquad.Business.Handlers.User;
 using SportSquad.Business.Models.Player.Response;
+using SportSquad.Business.Models.PlayerType;
 using SportSquad.Business.Models.Squad.Request;
 using SportSquad.Business.Models.Squad.Response;
 using SportSquad.Business.Models.User.Request;
@@ -66,10 +68,12 @@ namespace SportSquad.Business.Configuration
             services.AddScoped<IRequestHandler<UpdatePlayerCommand, CommandResponse<PlayerResponse>>, UpdatePlayerCommandHandler>();
             services.AddScoped<IRequestHandler<DeletePlayerCommand, CommandResponse<PlayerResponse>>, DeletePlayerCommandHandler>();
             services.AddScoped<IRequestHandler<GetAllPlayerCommand, CommandResponse<IEnumerable<PlayerResponse>>>, GetPlayerCommandHandler>();
+            services.AddScoped<IRequestHandler<GetAllPlayerBySquadIdCommand, CommandResponse<IEnumerable<PlayerGroupedTypeResponse>>>, GetPlayerCommandHandler>();
             services.AddScoped<IRequestHandler<GetPlayerByIdCommand, CommandResponse<PlayerResponse>>, GetPlayerCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateSquadConfigCommand, CommandResponse<SquadConfigResponse>>, UpdateSquadCommandHandler>();
             services.AddScoped<IRequestHandler<DeleteSquadConfigCommand, CommandResponse<SquadConfigResponse>>, DeleteSquadCommandHandler>();
             services.AddScoped<IRequestHandler<GetAllSquadByUserCommand, CommandResponse<IEnumerable<SquadResponse>>>, GetSquadCommandHandler>();
+            services.AddScoped<IRequestHandler<GetAllPlayerTypeCommand, CommandResponse<IEnumerable<PlayerTypeResponse>>>, GetPlayerCommandHandler>();
         }
     }
 }

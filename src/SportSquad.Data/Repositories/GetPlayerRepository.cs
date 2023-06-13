@@ -28,4 +28,50 @@ public class GetPlayerRepository : BaseRepository<Player>, IGetPlayerRepository
                 UserId = p.UserId
             }).ToListAsync();
     }
+
+    public async Task<IEnumerable<PlayerTypeResponse>> GetAllPlayersTypesAsync()
+    {
+        return await Db.PlayerTypes.AsNoTracking()
+            .Select(pt => new PlayerTypeResponse()
+            {
+                Name = pt.Name,
+                CreatedAt = pt.CreatedAt,
+                Code = pt.Code,
+                Id = pt.Id,
+                Icon = pt.Icon
+            }).ToListAsync();
+    }
+
+    public async Task<IEnumerable<PlayerGroupedTypeResponse>> GetAllBySquadIdGroupedAsync(Guid squadId)
+    {
+        var allPlayers = await Db.SquadConfigs.AsNoTracking()
+            .Where(sc => sc.SquadId == squadId)
+            .Select(sc => new PlayerGroupedTypeResponse()
+            {
+                PlayerTypeId = sc.PlayerTypeId,
+                PlayerTypeIcon = sc.PlayerType.Icon,
+                PlayerTypeName = sc.PlayerType.Name,
+                QuantityMaxPlayers = sc.QuantityPlayers,
+                QuantityPlayers = sc.Squad.Players.Count(p => p.PlayerTypeId == sc.PlayerTypeId),
+                Players = sc.Squad.Players.Where(p => p.PlayerTypeId == sc.PlayerTypeId)
+                    .Select(p => new PlayerGroupedPlayerResponse()
+                    {
+                        Name = p.Name,
+                        PlayerId = p.Id,
+                        SkillLevel = p.SkillLevel
+                    }).ToList()
+            }).ToListAsync();
+        
+        return allPlayers;
+    }
+
+    public async Task<int> GetQuantityPlayersSquadConfigAsync(Guid squadId, Guid playerTypeId)
+    {
+        var quantity = (await Db.SquadConfigs.FirstOrDefaultAsync(sc =>
+            sc.SquadId == squadId &&
+            sc.PlayerTypeId == playerTypeId
+        ))?.QuantityPlayers ?? default;
+
+        return quantity;
+    }
 }

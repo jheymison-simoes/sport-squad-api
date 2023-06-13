@@ -4,9 +4,11 @@ using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Options;
 using SportSquad.Business.Commands.Squad.Player;
+using SportSquad.Business.Commands.Squad.Player.PlayerType;
 using SportSquad.Business.Interfaces.Repositories;
 using SportSquad.Business.Models;
 using SportSquad.Business.Models.Player.Response;
+using SportSquad.Business.Models.PlayerType;
 using SportSquad.Core.Command;
 using SportSquad.Core.Resource;
 
@@ -14,11 +16,15 @@ namespace SportSquad.Business.Handlers.Player;
 
 public class GetPlayerCommandHandler : BaseHandler,
     IRequestHandler<GetAllPlayerCommand, CommandResponse<IEnumerable<PlayerResponse>>>,
-    IRequestHandler<GetPlayerByIdCommand, CommandResponse<PlayerResponse>>
+    IRequestHandler<GetPlayerByIdCommand, CommandResponse<PlayerResponse>>,
+    IRequestHandler<GetAllPlayerTypeCommand, CommandResponse<IEnumerable<PlayerTypeResponse>>>, 
+    IRequestHandler<GetAllPlayerBySquadIdCommand, CommandResponse<IEnumerable<PlayerGroupedTypeResponse>>>
 {
     #region Repositories
 
     private readonly IGetPlayerRepository _getPlayerRepository;
+    private IRequestHandler<GetAllPlayerBySquadIdCommand, CommandResponse<IEnumerable<PlayerGroupedTypeResponse>>>
+        _requestHandlerImplementation;
 
     #endregion
     
@@ -45,5 +51,17 @@ public class GetPlayerCommandHandler : BaseHandler,
 
         var response = Mapper.Map<PlayerResponse>(player);
         return ReturnReply(response);
+    }
+
+    public async Task<CommandResponse<IEnumerable<PlayerTypeResponse>>> Handle(GetAllPlayerTypeCommand request, CancellationToken cancellationToken)
+    {
+        var playersTypes = await _getPlayerRepository.GetAllPlayersTypesAsync();
+        return ReturnReply(playersTypes);
+    }
+
+    public async Task<CommandResponse<IEnumerable<PlayerGroupedTypeResponse>>> Handle(GetAllPlayerBySquadIdCommand request, CancellationToken cancellationToken)
+    {
+        var players = await _getPlayerRepository.GetAllBySquadIdGroupedAsync(request.SquadId);
+        return ReturnReply(players);;
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SportSquad.Data;
@@ -11,9 +12,11 @@ using SportSquad.Data;
 namespace SportSquad.Data.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    partial class SqlContextModelSnapshot : ModelSnapshot
+    [Migration("20230613220517_AddIconColumn")]
+    partial class AddIconColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,12 +60,6 @@ namespace SportSquad.Data.Migrations
                     b.Property<Guid>("PlayerTypeId")
                         .HasColumnType("uuid")
                         .HasColumnName("player_type_id");
-
-                    b.Property<int>("SkillLevel")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(0)
-                        .HasColumnName("skill_level");
 
                     b.Property<Guid>("SquadId")
                         .HasColumnType("uuid")

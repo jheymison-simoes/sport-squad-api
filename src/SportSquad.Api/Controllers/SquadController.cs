@@ -12,7 +12,6 @@ namespace SportSquad.Api.Controllers;
 [ApiController]
 [ApiVersion("1")]
 [Route("api/v{version:apiVersion}/[controller]")]
-[Authorize]
 public class SquadController : BaseController<SquadController>
 {
     public SquadController(
@@ -26,11 +25,10 @@ public class SquadController : BaseController<SquadController>
     public async Task<IActionResult> Create([FromBody] CreateSquadRequest request)
     {
         var command = Mapper.Map<CreateSquadCommand>(request);
-        command.UserId = GetUserIdLogged() ?? Guid.NewGuid();
+        command.UserId = GetUserIdLogged() ?? Guid.Parse("6ef8a1e2-6572-4e80-be47-34fb991d37e6");
         return CustomResponse(await Mediator.SendCommand<CreateSquadCommand, SquadResponse>(command));
     }
     
-    [AllowAnonymous]
     [HttpGet("{userId:guid}")]
     public async Task<IActionResult> GetAllByUserId(Guid userId)
     {

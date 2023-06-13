@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Resources;
 using FluentValidation;
+using SportSquad.Core.Resource;
 using SportSquad.Domain.Validate;
 
 namespace SportSquad.Domain.Models;
@@ -8,6 +9,7 @@ namespace SportSquad.Domain.Models;
 public class PlayerType : Entity
 {
     public string Name { get; set; }
+    public string Icon { get; set; }
 
     #region RelacionShip
     public List<SquadConfig> SquadConfigs { get; set; }
@@ -32,8 +34,12 @@ public class PlayerTypeValidator : BaseDomainAbstractValidator<PlayerType>
     {
         RuleFor(r => r.Name)
             .NotEmpty()
-                .WithMessage(GetMessageResource("PLAYER-TYPE-NAME_EMPTY"))
+                .WithMessage(ApiResource.PLAYER_TYPE_NAME_EMPTY)
             .Must(r => r.Length is > 3 and <= 100)
-                .WithMessage(GetMessageResource("PLAYER-TYPE_INVALID_NUMBER_CHARACTERS", 3, 100));
+                .WithMessage(string.Format(ApiResource.PLAYER_TYPE_INVALID_NUMBER_CHARACTERS, 3, 100));
+
+        RuleFor(r => r.Icon)
+            .NotEmpty()
+            .WithMessage(ApiResource.PLAYER_TYPE_ICON_EMPTY);
     }
 }
