@@ -26,6 +26,9 @@ public class PlayerMapping : IEntityTypeConfiguration<Player>
         
         entity.Property(e => e.UserId);
         
+        entity.Property(e => e.SkillLevel)
+            .HasDefaultValue(0);
+        
         entity.HasOne(a => a.Squad)
             .WithMany(c => c.Players)
             .HasForeignKey(a => a.SquadId)

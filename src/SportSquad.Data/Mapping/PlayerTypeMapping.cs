@@ -21,5 +21,10 @@ public class PlayerTypeMapping : IEntityTypeConfiguration<PlayerType>
         entity.Property(e => e.Name)
             .IsRequired()
             .HasMaxLength(100);
+        
+        entity.Property(e => e.Icon)
+            .IsRequired()
+            .HasDefaultValue("fa-check")
+            .HasMaxLength(100);
     }
 }

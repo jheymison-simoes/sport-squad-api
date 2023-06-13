@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SportSquad.Business.Commands.Squad.Player;
+using SportSquad.Business.Commands.Squad.Player.PlayerType;
 using SportSquad.Business.Models.Player.Request;
 using SportSquad.Business.Models.Player.Response;
+using SportSquad.Business.Models.PlayerType;
 using SportSquad.Core.Interfaces;
 
 namespace SportSquad.Api.Controllers;
@@ -55,4 +57,20 @@ public class PlayerController : BaseController<PlayerController>
         var command = new GetPlayerByIdCommand(id);
         return CustomResponse(await Mediator.SendCommand<GetPlayerByIdCommand, PlayerResponse>(command));
     }
+    
+    [HttpGet("GetAllBySquadId/{squadId:guid}")]
+    public async Task<IActionResult> GetAllBySquadId(Guid squadId)
+    {
+        var command = new GetAllPlayerBySquadIdCommand(squadId);
+        return CustomResponse(await Mediator.SendCommand<GetAllPlayerBySquadIdCommand, IEnumerable<PlayerGroupedTypeResponse>>(command));
+    }
+
+    #region Player Type
+    [HttpGet("PlayerType")]
+    public async Task<IActionResult> GetAllPlayerType()
+    {
+        var command = new GetAllPlayerTypeCommand();
+        return CustomResponse(await Mediator.SendCommand<GetAllPlayerTypeCommand, IEnumerable<PlayerTypeResponse>>(command));
+    }
+    #endregion
 }

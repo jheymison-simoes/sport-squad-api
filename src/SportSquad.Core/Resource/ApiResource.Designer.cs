@@ -195,6 +195,15 @@ namespace SportSquad.Core.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O icone do tipo de jogador não pode ser vazio..
+        /// </summary>
+        public static string PLAYER_TYPE_ICON_EMPTY {
+            get {
+                return ResourceManager.GetString("PLAYER-TYPE-ICON_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O nome do tipo de jogador deve ter entre &apos;{0}&apos; e &apos;{1}&apos; caracteres..
         /// </summary>
         public static string PLAYER_TYPE_INVALID_NUMBER_CHARACTERS {
