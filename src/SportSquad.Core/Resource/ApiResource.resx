@@ -249,4 +249,7 @@
   <data name="PLAYER-TYPE-ICON_EMPTY" xml:space="preserve">
     <value>O icone do tipo de jogador não pode ser vazio.</value>
   </data>
+  <data name="SQUAD-EXCEEDED_MAX_PLAYERS" xml:space="preserve">
+    <value>Não é possível adicionar mais jogadores para esse tipode jogador, pois a lista foi completada.</value>
+  </data>
 </root>

@@ -48,7 +48,12 @@ public class CreatePlayerCommandHandler : BaseHandler,
         var playerTypeExists = await _createPlayerRepository.ExistsPlayerTypeAsync(request.PlayerTypeId);
         if (!playerTypeExists) return ReturnError<PlayerResponse>(ApiResource.PLAYER_TYPE_NOT_FOUND_BY_ID, request.PlayerTypeId);
 
+        await CheckMaxPlayersSquadAsync(request.SquadId, request.PlayerTypeId);
+        if (!ValidOperation()) return ReturnReply<PlayerResponse>();
+        
         var player = Mapper.Map<PlayerDomain>(request);
+
+        player.UserId = player.UserId == default(Guid) ? null : player.UserId;
 
         await _playerValidator.ValidateAsync(player, cancellationToken);
         if (!ValidOperation()) return ReturnReply<PlayerResponse>();
@@ -58,5 +63,16 @@ public class CreatePlayerCommandHandler : BaseHandler,
 
         var response = Mapper.Map<PlayerResponse>(player);
         return ReturnReply(response);
+    }
+
+    private async Task CheckMaxPlayersSquadAsync(Guid squadId, Guid playerTypeId)
+    {
+        var squadConfig = await _createPlayerRepository.GetSquadConfigBySquadIdAsync(squadId, playerTypeId);
+        if (squadConfig is null) return;
+
+        var quantityPlayer = await _createPlayerRepository.GetQuantityPlayersSquadAsync(squadId, playerTypeId);
+        if (quantityPlayer < squadConfig.QuantityPlayers || squadConfig.AllowSubstitutes) return;
+
+        AddErrorResource(ApiResource.SQUAD_EXCEEDED_MAX_PLAYERS);
     }
 }

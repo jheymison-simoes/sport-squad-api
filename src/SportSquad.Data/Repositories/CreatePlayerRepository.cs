@@ -27,4 +27,16 @@ public class CreatePlayerRepository : BaseRepository<Player>, ICreatePlayerRepos
         return await Db.PlayerTypes.AsNoTracking()
             .AnyAsync(s => s.Id == playerTypeId);
     }
+
+    public async Task<SquadConfig> GetSquadConfigBySquadIdAsync(Guid squadId, Guid playerTypeId)
+    {
+        return await Db.SquadConfigs.AsNoTracking()
+            .FirstOrDefaultAsync(sc => sc.SquadId == squadId && sc.PlayerTypeId == playerTypeId);
+    }
+
+    public async Task<int> GetQuantityPlayersSquadAsync(Guid squadId, Guid playerTypeId)
+    {
+        return await Db.Players.AsNoTracking()
+            .CountAsync(p => p.SquadId == squadId && p.PlayerTypeId == playerTypeId);
+    }
 }
