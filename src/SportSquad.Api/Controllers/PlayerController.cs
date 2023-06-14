@@ -62,7 +62,7 @@ public class PlayerController : BaseController<PlayerController>
     public async Task<IActionResult> GetAllBySquadId(Guid squadId)
     {
         var command = new GetAllPlayerBySquadIdCommand(squadId);
-        return CustomResponse(await Mediator.SendCommand<GetAllPlayerBySquadIdCommand, IEnumerable<PlayerGroupedTypeResponse>>(command));
+        return CustomResponse(await Mediator.SendCommand<GetAllPlayerBySquadIdCommand, List<PlayerGroupedTypeResponse>>(command));
     }
 
     #region Player Type
