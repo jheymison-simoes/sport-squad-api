@@ -18,14 +18,10 @@ public class GetPlayerCommandHandler : BaseHandler,
     IRequestHandler<GetAllPlayerCommand, CommandResponse<IEnumerable<PlayerResponse>>>,
     IRequestHandler<GetPlayerByIdCommand, CommandResponse<PlayerResponse>>,
     IRequestHandler<GetAllPlayerTypeCommand, CommandResponse<IEnumerable<PlayerTypeResponse>>>, 
-    IRequestHandler<GetAllPlayerBySquadIdCommand, CommandResponse<IEnumerable<PlayerGroupedTypeResponse>>>
+    IRequestHandler<GetAllPlayerBySquadIdCommand, CommandResponse<List<PlayerGroupedTypeResponse>>>
 {
     #region Repositories
-
     private readonly IGetPlayerRepository _getPlayerRepository;
-    private IRequestHandler<GetAllPlayerBySquadIdCommand, CommandResponse<IEnumerable<PlayerGroupedTypeResponse>>>
-        _requestHandlerImplementation;
-
     #endregion
     
     public GetPlayerCommandHandler(
@@ -59,9 +55,22 @@ public class GetPlayerCommandHandler : BaseHandler,
         return ReturnReply(playersTypes);
     }
 
-    public async Task<CommandResponse<IEnumerable<PlayerGroupedTypeResponse>>> Handle(GetAllPlayerBySquadIdCommand request, CancellationToken cancellationToken)
+    public async Task<CommandResponse<List<PlayerGroupedTypeResponse>>> Handle(GetAllPlayerBySquadIdCommand request, CancellationToken cancellationToken)
     {
-        var players = await _getPlayerRepository.GetAllBySquadIdGroupedAsync(request.SquadId);
-        return ReturnReply(players);;
+        var players = (await _getPlayerRepository.GetAllBySquadIdGroupedAsync(request.SquadId)).ToList();
+        if (!players.Any()) return ReturnReply(players);
+        
+        foreach (var playerType in players)
+        {
+            for (var i = 0; i < playerType.Players.Count(); i++)
+            {
+                var player = playerType.Players.ElementAt(i);
+                player.Index = i + 1;
+                if (playerType.QuantityMaxPlayers >= player.Index) continue;
+                player.Substitute = true;
+            }
+        }
+        
+        return ReturnReply(players);
     }
 }

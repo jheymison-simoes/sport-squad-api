@@ -8,7 +8,7 @@ using SportSquad.Core.Resource;
 
 namespace SportSquad.Business.Commands.Squad.Player;
 
-public class GetAllPlayerBySquadIdCommand : Command<IEnumerable<PlayerGroupedTypeResponse>>
+public class GetAllPlayerBySquadIdCommand : Command<List<PlayerGroupedTypeResponse>>
 {
     public Guid SquadId { get; set; }
     

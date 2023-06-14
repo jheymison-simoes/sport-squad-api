@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SportSquad.Business.Interfaces.Repositories;
+﻿using SportSquad.Business.Interfaces.Repositories;
 using SportSquad.Business.Models.Player.Response;
 using SportSquad.Business.Models.PlayerType;
 using SportSquad.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SportSquad.Data.Repositories;
 
@@ -46,6 +46,7 @@ public class GetPlayerRepository : BaseRepository<Player>, IGetPlayerRepository
     {
         var allPlayers = await Db.SquadConfigs.AsNoTracking()
             .Where(sc => sc.SquadId == squadId)
+            .OrderBy(sc => sc.CreatedAt)
             .Select(sc => new PlayerGroupedTypeResponse()
             {
                 PlayerTypeId = sc.PlayerTypeId,
@@ -54,6 +55,7 @@ public class GetPlayerRepository : BaseRepository<Player>, IGetPlayerRepository
                 QuantityMaxPlayers = sc.QuantityPlayers,
                 QuantityPlayers = sc.Squad.Players.Count(p => p.PlayerTypeId == sc.PlayerTypeId),
                 Players = sc.Squad.Players.Where(p => p.PlayerTypeId == sc.PlayerTypeId)
+                    .OrderBy(p=> p.CreatedAt)
                     .Select(p => new PlayerGroupedPlayerResponse()
                     {
                         Name = p.Name,
@@ -63,15 +65,5 @@ public class GetPlayerRepository : BaseRepository<Player>, IGetPlayerRepository
             }).ToListAsync();
         
         return allPlayers;
-    }
-
-    public async Task<int> GetQuantityPlayersSquadConfigAsync(Guid squadId, Guid playerTypeId)
-    {
-        var quantity = (await Db.SquadConfigs.FirstOrDefaultAsync(sc =>
-            sc.SquadId == squadId &&
-            sc.PlayerTypeId == playerTypeId
-        ))?.QuantityPlayers ?? default;
-
-        return quantity;
     }
 }
