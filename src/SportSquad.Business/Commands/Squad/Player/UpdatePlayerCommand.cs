@@ -15,6 +15,7 @@ public class UpdatePlayerCommand : Command<PlayerResponse>
     public string Name { get; set; }
     public Guid PlayerTypeId { get; set; }
     public Guid? UserId { get; set; }
+    public int SkillLevel { get; set; }
 
     public bool AsSame(string name, Guid playerTypeId)
     {

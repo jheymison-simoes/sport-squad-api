@@ -285,7 +285,7 @@ namespace SportSquad.Core.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Não é possível adicionar mais jogadores para esse tipode jogador, pois a lista foi completada..
+        ///   Looks up a localized string similar to Não é possível adicionar mais jogadores para esse tipo de jogador, pois a lista foi completada..
         /// </summary>
         public static string SQUAD_EXCEEDED_MAX_PLAYERS {
             get {
