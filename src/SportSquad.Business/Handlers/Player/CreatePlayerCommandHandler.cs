@@ -65,6 +65,7 @@ public class CreatePlayerCommandHandler : BaseHandler,
         return ReturnReply(response);
     }
 
+    #region Private Methods
     private async Task CheckMaxPlayersSquadAsync(Guid squadId, Guid playerTypeId)
     {
         var squadConfig = await _createPlayerRepository.GetSquadConfigBySquadIdAsync(squadId, playerTypeId);
@@ -75,4 +76,5 @@ public class CreatePlayerCommandHandler : BaseHandler,
 
         AddErrorResource(ApiResource.SQUAD_EXCEEDED_MAX_PLAYERS);
     }
+    #endregion
 }

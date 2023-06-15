@@ -6,4 +6,5 @@ public class UpdatePlayerRequest
     public string Name { get; set; }
     public Guid PlayerTypeId { get; set; }
     public Guid? UserId { get; set; }
+    public int SkillLevel { get; set; }
 }

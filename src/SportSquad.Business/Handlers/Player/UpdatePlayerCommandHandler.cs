@@ -34,18 +34,19 @@ public class UpdatePlayerCommandHandler : BaseHandler,
         var player = await _updatePlayerRepository.GetById(request.Id);
         if (player is null) return ReturnError<PlayerResponse>(ApiResource.PLAYER_NOT_FOUND_BY_ID, request.Id);
 
-        var asSame = request.AsSame(player.Name, player.PlayerTypeId);
+        var asSame = AsSame(request, player);
         if (asSame) return ReturnReply(Mapper.Map<PlayerResponse>(player));
         
-        var nameIsDuplicated = await _updatePlayerRepository.IsDuplicated(request.Name, player.SquadId);
-        if (nameIsDuplicated) return ReturnError<PlayerResponse>(ApiResource.SQUAD_PLAYER_NAME_DUPLICATED);
-
         var existsPlayerType = await _updatePlayerRepository.ExistsPlayerType(request.PlayerTypeId);
         if (!existsPlayerType) return ReturnError<PlayerResponse>(ApiResource.PLAYER_TYPE_NOT_FOUND_BY_ID, request.PlayerTypeId);
 
+        await CheckMaxPlayersSquadAsync(player.SquadId, request.PlayerTypeId);
+        if (!ValidOperation()) return ReturnReply<PlayerResponse>();
+        
         player.PlayerTypeId = request.PlayerTypeId;
         player.Name = request.Name;
         player.UserId = request.UserId;
+        player.SkillLevel = request.SkillLevel;
         
         _updatePlayerRepository.Update(player);
         await SaveData(_updatePlayerRepository.UnitOfWork);
@@ -53,4 +54,24 @@ public class UpdatePlayerCommandHandler : BaseHandler,
         var response = Mapper.Map<PlayerResponse>(player);
         return ReturnReply(response);
     }
+
+    #region Private Methods
+    private bool AsSame(UpdatePlayerCommand request, Domain.Models.Player player)
+    {
+        return request.SkillLevel == player.SkillLevel &&
+               request.PlayerTypeId == player.PlayerTypeId &&
+               request.Name == player.Name;
+    }
+    
+    private async Task CheckMaxPlayersSquadAsync(Guid squadId, Guid playerTypeId)
+    {
+        var squadConfig = await _updatePlayerRepository.GetSquadConfigBySquadIdAsync(squadId, playerTypeId);
+        if (squadConfig is null) return;
+
+        var quantityPlayer = await _updatePlayerRepository.GetQuantityPlayersSquadAsync(squadId, playerTypeId);
+        if (quantityPlayer < squadConfig.QuantityPlayers || squadConfig.AllowSubstitutes) return;
+
+        AddErrorResource(ApiResource.SQUAD_EXCEEDED_MAX_PLAYERS);
+    }
+    #endregion
 }
