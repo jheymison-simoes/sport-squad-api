@@ -19,6 +19,10 @@ public class DeleteSquadRepository : BaseRepository<Squad>, IDeleteSquadReposito
 
     public void DeleteSquadConfig(SquadConfig squadConfig) => Db.SquadConfigs.Remove(squadConfig);
     
+    public void DeleteSquadConfig(List<SquadConfig> squadConfigs)
+    {
+        Db.SquadConfigs.RemoveRange(squadConfigs);
+    }
 
     public async Task<List<Player>> GetAllSquadPlayersAsync(Guid squadId, Guid playerTypeId)
     {
@@ -30,4 +34,14 @@ public class DeleteSquadRepository : BaseRepository<Squad>, IDeleteSquadReposito
     }
 
     public void DeletePlayers(IEnumerable<Player> players) => Db.Players.RemoveRange(players);
+    
+    public async Task<Squad> GetByIdWithPlayersAsync(Guid squadId)
+    {
+        var squad = await DbSet.AsNoTracking()
+            .Include(s => s.Players)
+            .Include(s => s.SquadConfigs)
+            .FirstOrDefaultAsync(s => s.Id == squadId);
+
+        return squad;
+    }
 }
