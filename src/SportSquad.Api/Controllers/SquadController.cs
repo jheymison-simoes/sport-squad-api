@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SportSquad.Business.Commands.Squad;
 using SportSquad.Business.Commands.Squad.SquadConfig;
@@ -34,6 +33,14 @@ public class SquadController : BaseController<SquadController>
     {
         var command = new GetAllSquadByUserCommand(userId);
         return CustomResponse(await Mediator.SendCommand<GetAllSquadByUserCommand, IEnumerable<SquadResponse>>(command));
+    }
+    
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var command = new DeleteSquadByIdCommand(id);
+        // command.UserId = GetUserIdLogged() ?? Guid.Parse("6ef8a1e2-6572-4e80-be47-34fb991d37e6");
+        return CustomResponse(await Mediator.SendCommand<DeleteSquadByIdCommand, SquadResponse>(command));
     }
     
     [HttpPut("SquadConfig")]
