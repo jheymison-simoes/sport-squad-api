@@ -7,6 +7,7 @@ public class PlayerGroupedTypeResponse
     public string PlayerTypeIcon { get; set; }
     public int QuantityMaxPlayers { get; set; }
     public int QuantityPlayers { get; set; }
+    public bool AllowSubstitutes { get; set; }
     public List<PlayerGroupedPlayerResponse> Players { get; set; }
 }
 
