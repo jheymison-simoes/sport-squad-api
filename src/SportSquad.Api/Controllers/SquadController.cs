@@ -43,6 +43,13 @@ public class SquadController : BaseController<SquadController>
         return CustomResponse(await Mediator.SendCommand<DeleteSquadByIdCommand, SquadResponse>(command));
     }
     
+    [HttpGet("GetTextSquadShare/{squadId:guid}")]
+    public async Task<IActionResult> GetTextSquadShare(Guid squadId)
+    {
+        var command = new GetTextSquadSharedBySquadIdCommand(squadId);
+        return CustomResponse(await Mediator.SendCommand<GetTextSquadSharedBySquadIdCommand, string>(command));
+    }
+    
     [HttpPut("SquadConfig")]
     public async Task<IActionResult> UpdateSquadConfig([FromBody] UpdateSquadConfigRequest request)
     {
