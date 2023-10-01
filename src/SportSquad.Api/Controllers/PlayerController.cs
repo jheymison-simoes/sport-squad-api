@@ -64,6 +64,13 @@ public class PlayerController : BaseController<PlayerController>
         var command = new GetAllPlayerBySquadIdCommand(squadId);
         return CustomResponse(await Mediator.SendCommand<GetAllPlayerBySquadIdCommand, List<PlayerGroupedTypeResponse>>(command));
     }
+    
+    [HttpPost("CleanPlayersInSquad/{squadId:guid}")]
+    public async Task<IActionResult> CleanPlayersInSquad(Guid squadId)
+    {
+        var command = new CleanPlayersInSquadCommand(squadId);
+        return CustomResponse(await Mediator.SendCommand<CleanPlayersInSquadCommand, bool>(command));
+    }
 
     #region Player Type
     [HttpGet("PlayerType")]
