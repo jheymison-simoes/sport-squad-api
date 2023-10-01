@@ -21,5 +21,12 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
+# directories
+**/bin/
+**/obj/
+**/out/
+# files
+Dockerfile*
+**/*.md
 LICENSE
 README.md
