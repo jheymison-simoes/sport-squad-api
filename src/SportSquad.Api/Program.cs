@@ -1,3 +1,4 @@
+using Serilog;
 
 namespace SportSquad.Api;
 
@@ -10,10 +11,15 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration(Build)
-            .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
-
-    private static void Build(IConfigurationBuilder builder)
-    {
-    }
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            })
+            .UseSerilog((hostingContext, loggerConfiguration) =>
+            {
+                loggerConfiguration
+                    .ReadFrom.Configuration(hostingContext.Configuration)
+                    .Enrich.FromLogContext()
+                    .WriteTo.Console();
+            });
 }

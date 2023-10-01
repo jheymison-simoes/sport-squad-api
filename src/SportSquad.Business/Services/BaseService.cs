@@ -39,14 +39,14 @@ public abstract class BaseService
         throw (Activator.CreateInstance(typeof(TException), message) as TException)!;
     }
     
-    protected void ReturnResourceError(string nameResource, params object[] parameters)
+    protected CustomException ReturnResourceError(string nameResource, params object[] parameters)
     {
         var message = parameters.Length > default(int)
             ? ResourceSet.GetString(nameResource)!.ResourceFormat(parameters)
             : ResourceSet.GetString(nameResource);
 
-        throw new Exception(message);
+        return new CustomException(message);
     }
     
-    protected void ReturnError(string message) => throw new CustomException(message);
+    protected CustomException ReturnError(string message) => new (message);
 }

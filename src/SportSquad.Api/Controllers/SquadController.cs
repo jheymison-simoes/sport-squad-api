@@ -63,4 +63,11 @@ public class SquadController : BaseController<SquadController>
         var command = new DeleteSquadConfigCommand(id);
         return CustomResponse(await Mediator.SendCommand<DeleteSquadConfigCommand, SquadConfigResponse>(command));
     }
+    
+    [HttpPost("AssembleTeams")]
+    public async Task<IActionResult> AssemblyTeams([FromBody] AssembleTeamsRequest request)
+    {
+        var command = Mapper.Map<AssembleTeamsCommand>(request);
+        return CustomResponse(await Mediator.SendCommand<AssembleTeamsCommand, List<AssembledTeamResponse>>(command));
+    }
 }
