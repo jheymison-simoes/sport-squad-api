@@ -60,6 +60,15 @@ namespace SportSquad.Core.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A quantidade de times não pode ser vazia..
+        /// </summary>
+        public static string ASSEMBLED_TEAM_QUANTITY_TEAM_EMPTY {
+            get {
+                return ResourceManager.GetString("ASSEMBLED-TEAM-QUANTITY_TEAM_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O squad deve possuir configurações para a quantidade de jogadores..
         /// </summary>
         public static string CREATE_SQUAD_SQUAD_CONFIGS_EMPTY {
@@ -353,6 +362,15 @@ namespace SportSquad.Core.Resource {
         public static string SQUAD_USER_ID_EMPTY {
             get {
                 return ResourceManager.GetString("SQUAD-USER_ID_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Este squad não possui jogadores. Adicione jogadores a lista..
+        /// </summary>
+        public static string SQUAD_WITHOUT_PLAYERS {
+            get {
+                return ResourceManager.GetString("SQUAD-WITHOUT_PLAYERS", resourceCulture);
             }
         }
         

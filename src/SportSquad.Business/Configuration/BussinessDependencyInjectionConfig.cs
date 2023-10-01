@@ -9,17 +9,18 @@ using SportSquad.Business.Commands.Squad.Player;
 using SportSquad.Business.Commands.Squad.Player.PlayerType;
 using SportSquad.Business.Commands.Squad.SquadConfig;
 using SportSquad.Business.Commands.User;
-using SportSquad.Business.Handlers;
 using SportSquad.Business.Handlers.Authentication;
 using SportSquad.Business.Handlers.Player;
 using SportSquad.Business.Handlers.Squad;
 using SportSquad.Business.Handlers.User;
+using SportSquad.Business.Interfaces.Strategies;
 using SportSquad.Business.Models.Player.Response;
 using SportSquad.Business.Models.PlayerType;
 using SportSquad.Business.Models.Squad.Request;
 using SportSquad.Business.Models.Squad.Response;
 using SportSquad.Business.Models.User.Request;
 using SportSquad.Business.Models.User.Response;
+using SportSquad.Business.Strategies;
 using SportSquad.Core.Command;
 
 namespace SportSquad.Business.Configuration
@@ -56,6 +57,8 @@ namespace SportSquad.Business.Configuration
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAuthenticatedService, AuthenticatedService>();
             services.AddScoped<IEncryptService, EncryptService>();
+            services.AddScoped<IAssembleTeamsStrategyBalancedStrategy, AssembleTeamsStrategyBalancedStrategy>();
+            services.AddScoped<IAssembleTeamsStrategyNotBalancedStrategy, AssembleTeamsStrategyNotBalancedStrategyStrategy>();
         }
         
         private static void DependencyInjectionCommandHandlers(this IServiceCollection services)
@@ -75,7 +78,7 @@ namespace SportSquad.Business.Configuration
             services.AddScoped<IRequestHandler<GetAllSquadByUserCommand, CommandResponse<IEnumerable<SquadResponse>>>, GetSquadCommandHandler>();
             services.AddScoped<IRequestHandler<GetAllPlayerTypeCommand, CommandResponse<IEnumerable<PlayerTypeResponse>>>, GetPlayerCommandHandler>();
             services.AddScoped<IRequestHandler<DeleteSquadByIdCommand, CommandResponse<SquadResponse>>, DeleteSquadCommandHandler>();
-            services.AddScoped<IRequestHandler<GetTextSquadSharedBySquadIdCommand, CommandResponse<string>>, GetTextSquadSharedCommandHandler>();
+            services.AddScoped<IRequestHandler<AssembleTeamsCommand, CommandResponse<List<AssembledTeamResponse>>>, AssemblyTeamsCommandHandler>();
         }
     }
 }

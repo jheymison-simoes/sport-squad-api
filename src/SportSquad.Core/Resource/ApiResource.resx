@@ -252,4 +252,10 @@
   <data name="SQUAD-EXCEEDED_MAX_PLAYERS" xml:space="preserve">
     <value>Não é possível adicionar mais jogadores para esse tipo de jogador, pois a lista foi completada.</value>
   </data>
+  <data name="ASSEMBLED-TEAM-QUANTITY_TEAM_EMPTY" xml:space="preserve">
+    <value>A quantidade de times não pode ser vazia.</value>
+  </data>
+  <data name="SQUAD-WITHOUT_PLAYERS" xml:space="preserve">
+    <value>Este squad não possui jogadores. Adicione jogadores a lista.</value>
+  </data>
 </root>
