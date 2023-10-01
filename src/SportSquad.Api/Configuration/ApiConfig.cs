@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SportSquad.Api.Middlewares;
 using SportSquad.Business.Models;
 using SportSquad.Data;
 
@@ -70,7 +71,7 @@ public static class ApiConfig
         app.UseAuthorization();
 
         app.UseCors("Total");
-        
+        app.UseMiddleware<ErrorHandlingMiddleware>();
         app.UseKissLogConfiguration(configuration);
 
         app.UseEndpoints(endpoints =>
