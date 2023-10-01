@@ -80,6 +80,8 @@ namespace SportSquad.Business.Configuration
             services.AddScoped<IRequestHandler<DeleteSquadByIdCommand, CommandResponse<SquadResponse>>, DeleteSquadCommandHandler>();
             services.AddScoped<IRequestHandler<AssembleTeamsCommand, CommandResponse<List<AssembledTeamResponse>>>, AssemblyTeamsCommandHandler>();
             services.AddScoped<IRequestHandler<SharedTextAssembledTeamsCommand, CommandResponse<string>>, SharedTextAssembledTeamsCommandHandler>();
+            services.AddScoped<IRequestHandler<CleanPlayersInSquadCommand, CommandResponse<bool>>, CleanPlayersInSquadCommandHandler>();
+            services.AddScoped<IRequestHandler<GetTextSquadSharedBySquadIdCommand, CommandResponse<string>>, GetTextSquadSharedCommandHandler>();
         }
     }
 }
