@@ -17,7 +17,7 @@ public class GetTextSquadSharedCommandHandler : BaseHandler,
     IRequestHandler<GetTextSquadSharedBySquadIdCommand, CommandResponse<string>>
 {
     #region Repositories
-    private readonly IGetSquadTextSaredRepository _getSquadTextSaredRepository;
+    private readonly IGetSquadTextSaredRepository _getSquadTextSharedRepository;
     #endregion
 
     private const int MaxAllowSubstitutes = 2;
@@ -27,14 +27,14 @@ public class GetTextSquadSharedCommandHandler : BaseHandler,
         IOptions<AppSettings> appSettings,
         ResourceManager resourceManager,
         CultureInfo cultureInfo, 
-        IGetSquadTextSaredRepository getSquadTextSaredRepository) : base(mapper, appSettings, resourceManager, cultureInfo)
+        IGetSquadTextSaredRepository getSquadTextSharedRepository) : base(mapper, appSettings, resourceManager, cultureInfo)
     {
-        _getSquadTextSaredRepository = getSquadTextSaredRepository;
+        _getSquadTextSharedRepository = getSquadTextSharedRepository;
     }
 
     public async Task<CommandResponse<string>> Handle(GetTextSquadSharedBySquadIdCommand request, CancellationToken cancellationToken)
     {
-        var squad = await _getSquadTextSaredRepository.GetSquadByIdWithPlayersAsync(request.SquadId);
+        var squad = await _getSquadTextSharedRepository.GetSquadByIdWithPlayersAsync(request.SquadId);
         if (squad is null) return ReturnError<string>(ApiResource.SQUAD_NOT_FOUND_BY_ID, request.SquadId);
 
         var textShared = new StringBuilder();

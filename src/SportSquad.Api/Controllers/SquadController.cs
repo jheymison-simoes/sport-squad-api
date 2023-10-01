@@ -70,4 +70,11 @@ public class SquadController : BaseController<SquadController>
         var command = Mapper.Map<AssembleTeamsCommand>(request);
         return CustomResponse(await Mediator.SendCommand<AssembleTeamsCommand, List<AssembledTeamResponse>>(command));
     }
+    
+    [HttpPost("SharedTextAssembledTeams/{squadId:guid}")]
+    public async Task<IActionResult> SharedTextAssembledTeams(Guid squadId, [FromBody] List<AssembledTeamResponse> teams)
+    {
+        var command = new SharedTextAssembledTeamsCommand(squadId, teams);
+        return CustomResponse(await Mediator.SendCommand<SharedTextAssembledTeamsCommand, string>(command));
+    }
 }

@@ -258,4 +258,7 @@
   <data name="SQUAD-WITHOUT_PLAYERS" xml:space="preserve">
     <value>Este squad não possui jogadores. Adicione jogadores a lista.</value>
   </data>
+  <data name="LIST-ASSEMBLED-TEAMS_EMPTY" xml:space="preserve">
+    <value>A lista de times geradas não pode ser vazia.</value>
+  </data>
 </root>

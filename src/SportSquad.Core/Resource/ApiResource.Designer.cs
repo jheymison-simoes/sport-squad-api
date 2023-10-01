@@ -87,6 +87,15 @@ namespace SportSquad.Core.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A lista de times geradas não pode ser vazia..
+        /// </summary>
+        public static string LIST_ASSEMBLED_TEAMS_EMPTY {
+            get {
+                return ResourceManager.GetString("LIST-ASSEMBLED-TEAMS_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O email não pode ser vazio..
         /// </summary>
         public static string LOGIN_REQUEST_EMAIL_EMPTY {
