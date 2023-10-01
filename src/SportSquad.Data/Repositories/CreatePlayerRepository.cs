@@ -39,4 +39,11 @@ public class CreatePlayerRepository : BaseRepository<Player>, ICreatePlayerRepos
         return await Db.Players.AsNoTracking()
             .CountAsync(p => p.SquadId == squadId && p.PlayerTypeId == playerTypeId);
     }
+
+    public async Task SavePlayerAsync(Player player)
+    {
+        Db.Players.Add(player);
+        await Db.SaveChangesAsync();
+        await Db.Entry(player).Reference(s => s.PlayerType).LoadAsync();
+    }
 }

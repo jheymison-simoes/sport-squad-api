@@ -57,9 +57,8 @@ public class CreatePlayerCommandHandler : BaseHandler,
 
         await _playerValidator.ValidateAsync(player, cancellationToken);
         if (!ValidOperation()) return ReturnReply<PlayerResponse>();
-        
-        _createPlayerRepository.Add(player);
-        await SaveData(_createPlayerRepository.UnitOfWork);
+
+        await _createPlayerRepository.SavePlayerAsync(player);
 
         var response = Mapper.Map<PlayerResponse>(player);
         return ReturnReply(response);
