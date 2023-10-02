@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportSquad.Business", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportSquad.Data", "src\SportSquad.Data\SportSquad.Data.csproj", "{CEE8F510-C061-49A7-BB09-52034183A079}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{70B18D42-A4E0-4201-B804-7BAE46D63E05}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{ED8CFB24-D3D5-4958-85B3-BD238646020A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportSquad.Business.Tests", "src\SportSquad.Business.Tests\SportSquad.Business.Tests.csproj", "{7855AC05-99BF-4156-96AA-E1B47E3E409C}"
@@ -37,10 +35,6 @@ Global
 		{CEE8F510-C061-49A7-BB09-52034183A079}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEE8F510-C061-49A7-BB09-52034183A079}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEE8F510-C061-49A7-BB09-52034183A079}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70B18D42-A4E0-4201-B804-7BAE46D63E05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70B18D42-A4E0-4201-B804-7BAE46D63E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70B18D42-A4E0-4201-B804-7BAE46D63E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70B18D42-A4E0-4201-B804-7BAE46D63E05}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7855AC05-99BF-4156-96AA-E1B47E3E409C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7855AC05-99BF-4156-96AA-E1B47E3E409C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7855AC05-99BF-4156-96AA-E1B47E3E409C}.Release|Any CPU.ActiveCfg = Release|Any CPU

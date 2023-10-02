@@ -11,6 +11,11 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration(builder =>
+            {
+                var ambient = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+                if (ambient is "Docker" or "Homolog") builder.AddJsonFile($"appsettings.{ambient}.json", false);
+            })
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();
