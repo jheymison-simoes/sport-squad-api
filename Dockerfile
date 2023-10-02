@@ -1,14 +1,15 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["src/SportSquad.Api/SportSquad.Api.csproj", "SportSquad.Api/"]
 COPY ["src/SportSquad.Business/SportSquad.Business.csproj", "SportSquad.Business/"]
 COPY ["src/SportSquad.Domain/SportSquad.Domain.csproj", "SportSquad.Domain/"]
 COPY ["src/SportSquad.Data/SportSquad.Data.csproj", "SportSquad.Data/"]
+COPY ["src/SportSquad.Core/SportSquad.Core.csproj", "SportSquad.Core/"]
 RUN dotnet restore "SportSquad.Api/SportSquad.Api.csproj"
 COPY . .
 WORKDIR "src/SportSquad.Api"
