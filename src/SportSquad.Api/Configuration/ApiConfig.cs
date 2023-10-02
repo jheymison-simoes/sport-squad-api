@@ -1,4 +1,5 @@
-﻿using KissLog.AspNetCore;
+﻿using System.Reflection;
+using KissLog.AspNetCore;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,8 +13,7 @@ public static class ApiConfig
 {
     public static void AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
-        var appSettingsSection = configuration.GetSection("AppSettings");
-        services.Configure<AppSettings>(appSettingsSection);
+        var appSettings = configuration.Get<AppSettings>();
 
         services.AddKissLogConfiguration();
         
@@ -24,7 +24,7 @@ public static class ApiConfig
         services.AddDbContext<SqlContext>(options =>
         {
             options
-                .UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
+                .UseNpgsql(appSettings.DbConnection,
                     builder => builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery));
         });
             

@@ -14,7 +14,7 @@ public class Program
             .ConfigureAppConfiguration(builder =>
             {
                 var ambient = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-                if (ambient is "Docker" or "Homolog") builder.AddJsonFile($"appsettings.{ambient}.json", false);
+                if (ambient is "Docker" or "Development") builder.AddJsonFile($"appsettings.{ambient}.json", false);
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {

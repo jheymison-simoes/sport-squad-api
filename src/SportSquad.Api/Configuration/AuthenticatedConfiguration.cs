@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SportSquad.Business.Models;
 
@@ -11,9 +12,7 @@ public static class AuthenticatedConfiguration
 {
     public static void AddAuthenticatedJwt(this IServiceCollection services, IConfiguration configuration)
     {
-        var appSettingsSection = configuration.GetSection("AppSettings");
-        services.Configure<AppSettings>(appSettingsSection);
-        var appSettings = appSettingsSection.Get<AppSettings>();
+        var appSettings = configuration.Get<AppSettings>();
         var key = Encoding.ASCII.GetBytes(appSettings.SecretToken);
 
         services.AddAuthentication(x =>
