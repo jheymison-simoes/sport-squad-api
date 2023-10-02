@@ -9,4 +9,5 @@ public class AppSettings
     public string KissLogApplicationId {get; set;}
     public string KissLogApiUrl {get; set;}
     public string SportSquadAppUrl { get; set; }
+    public string DbConnection { get; set; }
 }

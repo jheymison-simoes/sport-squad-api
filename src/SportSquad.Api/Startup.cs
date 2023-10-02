@@ -16,6 +16,7 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddAppSettingsConfig(Configuration);
         services.AddApiConfiguration(Configuration);
         services.AddResourceConfiguration();
         services.AddAuthenticatedJwt(Configuration);
