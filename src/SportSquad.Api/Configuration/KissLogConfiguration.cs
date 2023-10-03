@@ -31,8 +31,7 @@ public static class KissLogConfiguration
     
     public static void UseKissLogConfiguration(this IApplicationBuilder app, IConfiguration configuration)
     {
-        var appSettingsSection = configuration.GetSection("AppSettings");
-        var appSettings = appSettingsSection.Get<AppSettings>();
+        var appSettings = configuration.Get<AppSettings>();
         app.UseKissLogMiddleware((_) => ConfigureKissLog(appSettings));
     }
     
