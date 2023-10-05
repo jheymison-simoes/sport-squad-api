@@ -23,7 +23,7 @@ public class AuthenticationCommandHandler : BaseHandler,
 
     public AuthenticationCommandHandler(
         IMapper mapper, 
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager, 
         CultureInfo cultureInfo,
         ICreateUserRepository createUserRepository, 

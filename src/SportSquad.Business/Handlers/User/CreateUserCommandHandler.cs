@@ -32,7 +32,7 @@ public class CreateUserCommandHandler : BaseHandler,
     
     public CreateUserCommandHandler(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager, 
         CultureInfo cultureInfo, 
         ICreateUserRepository createUserRepository, 

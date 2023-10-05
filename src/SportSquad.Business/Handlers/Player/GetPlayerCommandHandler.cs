@@ -26,7 +26,7 @@ public class GetPlayerCommandHandler : BaseHandler,
     
     public GetPlayerCommandHandler(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager,
         CultureInfo cultureInfo, 
         IGetPlayerRepository getPlayerRepository) : base(mapper, appSettings, resourceManager, cultureInfo)

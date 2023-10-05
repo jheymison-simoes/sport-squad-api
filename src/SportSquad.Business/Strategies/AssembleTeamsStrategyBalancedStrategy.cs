@@ -13,7 +13,7 @@ public class AssembleTeamsStrategyBalancedStrategy : BaseService, IAssembleTeams
 {
     public AssembleTeamsStrategyBalancedStrategy(
         IMapper mapper,
-        IOptions<AppSettings> appSettings, 
+        AppSettings appSettings, 
         ResourceManager resourceManager,
         CultureInfo cultureInfo
     ) : base(mapper, appSettings, resourceManager, cultureInfo)

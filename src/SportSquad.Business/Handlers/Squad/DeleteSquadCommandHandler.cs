@@ -24,7 +24,7 @@ public class DeleteSquadCommandHandler : BaseHandler,
     
     public DeleteSquadCommandHandler(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager,
         CultureInfo cultureInfo,
         IDeleteSquadRepository deleteSquadRepository) : base(mapper, appSettings, resourceManager, cultureInfo)

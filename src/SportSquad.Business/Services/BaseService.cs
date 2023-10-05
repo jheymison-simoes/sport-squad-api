@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using System.Resources;
 using AutoMapper;
-using Microsoft.Extensions.Options;
 using SportSquad.Business.Exceptions;
 using SportSquad.Business.Models;
 using SportSquad.Business.Utils;
@@ -16,12 +15,12 @@ public abstract class BaseService
 
     protected BaseService(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager,
         CultureInfo cultureInfo)
     {
         Mapper = mapper;
-        AppSettings = appSettings.Value;
+        AppSettings = appSettings;
         ResourceSet = resourceManager.GetResourceSet(cultureInfo, true, true);
     }
 

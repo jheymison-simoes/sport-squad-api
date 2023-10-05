@@ -28,13 +28,12 @@ public class AuthenticatedService : BaseService, IAuthenticatedService
     
     public AuthenticatedService(
         IMapper mapper, 
-        IOptions<AppSettings> appSettings, 
+        AppSettings appSettings, 
         ResourceManager resourceManager, 
         CultureInfo cultureInfo,
         ICreateUserRepository createUserRepository,
         ITokenService tokenService,
         IEncryptService encryptService
-        // LoginRequestValidator loginRequestValidator
         ) : base(mapper, appSettings, resourceManager, cultureInfo)
     {
         // _loginRequestValidator = loginRequestValidator;

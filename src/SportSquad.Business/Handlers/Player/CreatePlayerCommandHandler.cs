@@ -27,7 +27,7 @@ public class CreatePlayerCommandHandler : BaseHandler,
     
     public CreatePlayerCommandHandler(
         IMapper mapper,
-        IOptions<AppSettings> appSettings, 
+        AppSettings appSettings, 
         ResourceManager resourceManager,
         CultureInfo cultureInfo,
         ICreatePlayerRepository createPlayerRepository,

@@ -20,7 +20,7 @@ public class CleanPlayersInSquadCommandHandler : BaseHandler,
     
     public CleanPlayersInSquadCommandHandler(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager,
         CultureInfo cultureInfo,
         ICleanPlayersInSquadRepository cleanPlayersInSquadRepository

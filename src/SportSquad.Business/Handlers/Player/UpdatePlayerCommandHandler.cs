@@ -21,7 +21,7 @@ public class UpdatePlayerCommandHandler : BaseHandler,
     
     public UpdatePlayerCommandHandler(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager,
         CultureInfo cultureInfo,
         IUpdatePlayerRepository updatePlayerRepository) : base(mapper, appSettings, resourceManager, cultureInfo)

@@ -29,7 +29,7 @@ public class CreateSquadCommandHandler : BaseHandler,
     
     public CreateSquadCommandHandler(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager, 
         CultureInfo cultureInfo,
         ICreateSquadRepository createSquadRepository, 

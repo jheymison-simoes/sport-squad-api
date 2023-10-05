@@ -21,7 +21,7 @@ public class UpdateSquadCommandHandler : BaseHandler,
     
     public UpdateSquadCommandHandler(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager,
         CultureInfo cultureInfo,
         IUpdateSquadRepository updateSquadRepository) : base(mapper, appSettings, resourceManager, cultureInfo)
