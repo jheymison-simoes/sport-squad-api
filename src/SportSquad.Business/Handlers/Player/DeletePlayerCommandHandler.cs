@@ -21,7 +21,7 @@ public class DeletePlayerCommandHandler : BaseHandler,
     
     public DeletePlayerCommandHandler(
         IMapper mapper, 
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager,
         CultureInfo cultureInfo, 
         IDeletePlayerRepository deletePlayerRepository) : base(mapper, appSettings, resourceManager, cultureInfo)

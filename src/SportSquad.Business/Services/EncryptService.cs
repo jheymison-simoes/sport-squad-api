@@ -11,7 +11,7 @@ public class EncryptService : BaseService, IEncryptService
 {
     public EncryptService(
         IMapper mapper, 
-        IOptions<AppSettings> appSettings, 
+        AppSettings appSettings, 
         ResourceManager resourceManager, 
         CultureInfo cultureInfo) : base(mapper, appSettings, resourceManager, cultureInfo)
     {

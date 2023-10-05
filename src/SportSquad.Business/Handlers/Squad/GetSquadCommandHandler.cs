@@ -20,7 +20,7 @@ public class GetSquadCommandHandler : BaseHandler,
     
     public GetSquadCommandHandler(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager,
         CultureInfo cultureInfo, 
         IGetSquadRepository getSquadRepository) : base(mapper, appSettings, resourceManager, cultureInfo)

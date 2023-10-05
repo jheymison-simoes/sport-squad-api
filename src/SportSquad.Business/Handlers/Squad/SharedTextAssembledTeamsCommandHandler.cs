@@ -22,7 +22,7 @@ public class SharedTextAssembledTeamsCommandHandler : BaseHandler,
     
     public SharedTextAssembledTeamsCommandHandler(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager,
         CultureInfo cultureInfo, IGetSquadTextSaredRepository getSquadTextSharedRepository) : base(mapper, appSettings, resourceManager, cultureInfo)
     {

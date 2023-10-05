@@ -14,7 +14,7 @@ public class AssembleTeamsStrategyNotBalancedStrategyStrategy : BaseService, IAs
 {
     public AssembleTeamsStrategyNotBalancedStrategyStrategy(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager,
         CultureInfo cultureInfo
     ) : base(mapper, appSettings, resourceManager, cultureInfo)

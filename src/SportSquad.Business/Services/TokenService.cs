@@ -17,7 +17,7 @@ public class TokenService : BaseService, ITokenService
     
     public TokenService(
         IMapper mapper, 
-        IOptions<AppSettings> appSettings, 
+        AppSettings appSettings, 
         ResourceManager resourceManager, 
         CultureInfo cultureInfo) : base(mapper, appSettings, resourceManager, cultureInfo)
     {

@@ -16,12 +16,12 @@ public abstract class BaseHandler : CommandHandler
 
     protected BaseHandler(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager,
         CultureInfo cultureInfo)
     {
         Mapper = mapper;
-        AppSettings = appSettings.Value;
+        AppSettings = appSettings;
         ResourceSet = resourceManager.GetResourceSet(cultureInfo, true, true);
     }
     

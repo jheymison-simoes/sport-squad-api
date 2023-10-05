@@ -24,7 +24,7 @@ public class GetTextSquadSharedCommandHandler : BaseHandler,
     
     public GetTextSquadSharedCommandHandler(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager,
         CultureInfo cultureInfo, 
         IGetSquadTextSaredRepository getSquadTextSharedRepository) : base(mapper, appSettings, resourceManager, cultureInfo)

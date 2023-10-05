@@ -29,7 +29,7 @@ public class AssemblyTeamsCommandHandler : BaseHandler,
     
     public AssemblyTeamsCommandHandler(
         IMapper mapper,
-        IOptions<AppSettings> appSettings,
+        AppSettings appSettings,
         ResourceManager resourceManager, 
         CultureInfo cultureInfo, 
         IAssembleTeamsRepository assembleTeamsRepository, 
