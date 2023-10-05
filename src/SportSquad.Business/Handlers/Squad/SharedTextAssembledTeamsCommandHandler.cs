@@ -39,7 +39,7 @@ public class SharedTextAssembledTeamsCommandHandler : BaseHandler,
         textShared.AppendLine($"*TIMES MONTADOS COM MEU RAXA* -> {AppSettings.SportSquadAppUrl} \n");
         textShared = GenerateSquadTextShared(request.AssembledTeams, textShared);
         textShared.AppendLine("Monte o time novamente clicando no link abaixo:");
-        textShared.AppendLine($"{AppSettings.SportSquadAppUrl}/my-squads/assemble-teams/{squad.Id}");
+        textShared.AppendLine($"{AppSettings.SportSquadAppUrl}/my-squads/squad/assemble-teams/{squad.Id}");
 
         return ReturnReply(textShared.ToString());
     }
@@ -55,9 +55,7 @@ public class SharedTextAssembledTeamsCommandHandler : BaseHandler,
             textShared.Append($"*{at.TeamName.ToUpper()}* \n");
             at.Players.ForEach(p =>
             {
-                var skillLevel = string.Empty;
-                for (var i = 0; i < p.SkillLevel; i++) skillLevel += "⭐";
-                textShared.AppendLine($"- {p.PlayerName} {skillLevel}");
+                textShared.AppendLine($"- {p.PlayerName}");
             });
 
             if (count < assembledTeams.Count) textShared.AppendLine("-----------------------");
