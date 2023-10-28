@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EfCoreDialogsState">
+    <option name="keyValueStorage">
+      <map>
+        <entry key="Common:buildConfiguration" value="Debug" />
+        <entry key="Common:cee8f510-c061-49a7-bb09-52034183a079:dbContext" value="SportSquad.Data.SqlContext" />
+        <entry key="Common:noBuild" value="false" />
+        <entry key="Common:outputFolder" value="Migrations" />
+        <entry key="Common:useDefaultConnection" value="true" />
+      </map>
+    </option>
+  </component>
+</project>

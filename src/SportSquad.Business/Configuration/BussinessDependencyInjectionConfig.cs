@@ -38,7 +38,6 @@ namespace SportSquad.Business.Configuration
         {
             #region Bussiness
             services.AddScoped<CreateSquadSquadConfigValidator>();
-            services.AddScoped<LoginWithGoogleRequestValidator>();
             services.AddScoped<CreateUserWithGoogleRequest>();
             #endregion
 
@@ -64,6 +63,7 @@ namespace SportSquad.Business.Configuration
         private static void DependencyInjectionCommandHandlers(this IServiceCollection services)
         {
             services.AddScoped<IRequestHandler<LoginCommand, CommandResponse<UserSessionResponse>>, AuthenticationCommandHandler>();
+            services.AddScoped<IRequestHandler<LoginWithGoogleCommand, CommandResponse<UserSessionResponse>>, AuthenticationCommandHandler>();
             services.AddScoped<IRequestHandler<CreateUserCommand, CommandResponse<UserResponse>>, CreateUserCommandHandler>();
             services.AddScoped<IRequestHandler<CreateUserWithGoogleCommand, CommandResponse<UserResponse>>, CreateUserCommandHandler>();
             services.AddScoped<IRequestHandler<CreateSquadCommand, CommandResponse<SquadResponse>>, CreateSquadCommandHandler>();
@@ -82,6 +82,7 @@ namespace SportSquad.Business.Configuration
             services.AddScoped<IRequestHandler<SharedTextAssembledTeamsCommand, CommandResponse<string>>, SharedTextAssembledTeamsCommandHandler>();
             services.AddScoped<IRequestHandler<CleanPlayersInSquadCommand, CommandResponse<bool>>, CleanPlayersInSquadCommandHandler>();
             services.AddScoped<IRequestHandler<GetTextSquadSharedBySquadIdCommand, CommandResponse<string>>, GetTextSquadSharedCommandHandler>();
+            services.AddScoped<IRequestHandler<GetAllPlayerTypeBySquadIdCommand, CommandResponse<List<PlayerTypeResponse>>>, GetAllPlayerTypeBySquadIdCommandHandler>();
         }
     }
 }

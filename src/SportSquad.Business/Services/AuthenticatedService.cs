@@ -60,7 +60,7 @@ public class AuthenticatedService : BaseService, IAuthenticatedService
             Token = tokenGenerated.token,
             ExpireIn = (int)tokenGenerated.expireDate.Subtract(DateTime.UtcNow).TotalSeconds,
             UserName = user.Name,
-            ExpireTymeSpan = tokenGenerated.expireDate
+            ExpireTimeSpan = tokenGenerated.expireDate
         };
     }
 }

@@ -26,4 +26,11 @@ public class AuthenticatedController : BaseController<AuthenticatedController>
         var command = Mapper.Map<LoginCommand>(loginRequest);
         return CustomResponse(await Mediator.SendCommand<LoginCommand, UserSessionResponse>(command));
     }
+    
+    [HttpPost("LoginWithGoogle")]
+    public async Task<IActionResult> LoginWithGoogleAsync([FromBody] LoginWithGoogleRequest request)
+    {
+        var command = Mapper.Map<LoginWithGoogleCommand>(request);
+        return CustomResponse(await Mediator.SendCommand<LoginWithGoogleCommand, UserSessionResponse>(command));
+    }
 }

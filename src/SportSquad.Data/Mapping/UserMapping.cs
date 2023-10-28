@@ -19,18 +19,20 @@ public class UserMapping : IEntityTypeConfiguration<User>
         entity.Property(e => e.CreatedAt);
 
         entity.Property(e => e.Ddd)
-            .IsRequired()
+            .IsRequired(false)
             .HasMaxLength(2);
         
         entity.Property(e => e.PhoneNumber)
-            .IsRequired()
+            .IsRequired(false)
             .HasMaxLength(9);
         
         entity.Property(e => e.Email)
             .HasMaxLength(250);
         
         entity.Property(e => e.Password)
-            .IsRequired()
+            .IsRequired(false)
             .HasMaxLength(1024);
+
+        entity.Ignore(e => e.ImageUrl);
     }
 }

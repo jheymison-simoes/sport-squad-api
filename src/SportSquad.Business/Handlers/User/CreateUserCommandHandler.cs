@@ -2,7 +2,6 @@
 using System.Resources;
 using AutoMapper;
 using MediatR;
-using Microsoft.Extensions.Options;
 using SportSquad.Business.Commands.User;
 using SportSquad.Business.Interfaces.Repositories;
 using SportSquad.Business.Interfaces.Services;

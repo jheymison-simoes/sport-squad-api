@@ -24,10 +24,10 @@ public abstract class BaseController<TController> : ControllerBase
         Mediator = mediator;
     }
     
-    protected Guid? GetUserIdLogged()
+    protected Guid GetUserIdLogged()
     {
         var id = User.FindFirstValue("Id");
-        var userId = !string.IsNullOrWhiteSpace(id) ? Guid.Parse(id) : (Guid?)null;
+        var userId = !string.IsNullOrWhiteSpace(id) ? Guid.Parse(id) : default;
         return userId;
     }
     

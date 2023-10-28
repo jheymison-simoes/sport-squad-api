@@ -79,5 +79,12 @@ public class PlayerController : BaseController<PlayerController>
         var command = new GetAllPlayerTypeCommand();
         return CustomResponse(await Mediator.SendCommand<GetAllPlayerTypeCommand, IEnumerable<PlayerTypeResponse>>(command));
     }
+    
+    [HttpGet("PlayerType/{squadId:guid}")]
+    public async Task<IActionResult> GetAllPlayerType(Guid squadId)
+    {
+        var command = new GetAllPlayerTypeBySquadIdCommand(squadId);
+        return CustomResponse(await Mediator.SendCommand<GetAllPlayerTypeBySquadIdCommand, List<PlayerTypeResponse>>(command));
+    }
     #endregion
 }

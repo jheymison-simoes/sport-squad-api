@@ -1,6 +1,9 @@
-﻿namespace SportSquad.Business.Models.User.Request;
+﻿using SportSquad.Business.Models.User.Response;
+using SportSquad.Core.Command;
 
-public class LoginWithGoogleRequest
+namespace SportSquad.Business.Commands.Authentication;
+
+public class LoginWithGoogleCommand : Command<UserSessionResponse>
 {
     public string Provider { get; set; }
     public string Id { get; set; }
