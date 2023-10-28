@@ -41,7 +41,7 @@ public class GetTextSquadSharedCommandHandler : BaseHandler,
         textShared.AppendLine($"*{squad.SquadName}* \n");
         textShared = GenerateSquadTextShared(squad.PlayersType, textShared);
         textShared.AppendLine("Adicione ou remova seu nome a lista clicando no link abaixo:");
-        textShared.AppendLine($"{AppSettings.SportSquadAppUrl}/my-squads/squad/{squad.SquadId}");
+        textShared.AppendLine($"{AppSettings.SportSquadAppUrl}/players/create/{squad.SquadId}");
         
         var response = textShared.ToString();
         return ReturnReply(response);
