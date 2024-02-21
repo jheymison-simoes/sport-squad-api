@@ -20,7 +20,8 @@ public class GetPlayerRepository : BaseRepository<Player>, IGetPlayerRepository
             {
                 PlayerType = new PlayerTypeResponse()
                 {
-                    Name = p.PlayerType.Name
+                    Name = p.PlayerType.Name,
+                    Icon = p.PlayerType.Icon
                 },
                 Name = p.Name,
                 PlayerTypeId = p.PlayerTypeId,
